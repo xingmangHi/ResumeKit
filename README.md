@@ -6,6 +6,9 @@
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)
 ![Platform: Browser](https://img.shields.io/badge/platform-browser-lightgrey.svg)
 
+如果你使用Markdown编辑好了一份简历的文字内容，但苦于怎么更好的展现，这个简历排版项目一定适合你
+（如果模板和配色没有喜欢或合适的，可以和AI交流让其基于模板修改新的）
+
 ---
 
 ## ✨ 核心特性
@@ -21,21 +24,10 @@
 
 ## 📸 预览
 
-> 暂无截图。如要贡献预览图,请将 PNG 放到 `docs/screenshots/` 后在本节用 Markdown 引用:
->
+> 现有的从网络渠道模仿和延申的简历模板在`template/`下，可直接用浏览器查看
 > ```markdown
-> ![简约_互联网_黑](./docs/screenshots/简约_互联网_黑.png)
+> ![简约_文化传媒_蓝](./docs/screenshots/简约_文化传媒_蓝.jpeg)
 > ```
-
-模板示例(`template/` 目录):
-
-- `简约_互联网_黑.html`
-- `简约_互联网_蓝.html`
-- `简约_金融_黑.html`
-- `简约_制造业_紫.html`
-- `简约_文化传媒_蓝.html`
-- `商务_互联网_蓝.html`
-- `清新_教师_紫.html`
 
 ---
 
@@ -46,6 +38,7 @@
 - 任意现代浏览器(Chrome / Edge / Firefox / Safari 任一)
 - 任意文本编辑器(VSCode / Sublime / 记事本都行)
 - 无需 Node.js、无需 Python、无需任何构建工具
+- 任意能够在本地运行的Agent代理
 
 ### 5 分钟上手
 
@@ -62,15 +55,9 @@ open template/简约_互联网_黑.html
 # Linux
 xdg-open template/简约_互联网_黑.html
 
-# 3. 复制模板到 temp/ 目录开始改
-mkdir -p temp/$(date +%Y-%m-%d-%H-%M)
-cp template/简约_互联网_黑.html temp/<时间戳>/draft.html
-```
+# 3. 复制已有的Markdown格式简历到 `source/` 文件夹下
 
-接下来:
-1. 用编辑器把 `draft.html` 里的占位符(`某某大学` / `某某公司` / `姓名` 等)替换成你自己的内容
-2. 浏览器打开 `draft.html`,Ctrl+P 试打一页 A4 验证排版
-3. 满意后把成品复制到 `prospect/<姓名>_<岗位>_简历.html`
+# 4. 使用你的Agent代理打开文件夹
 
 ---
 
@@ -132,10 +119,10 @@ JSON 格式:
 - **CSS 变量**:颜色、间距、字号等用 CSS 变量定义(便于复用)
 - **不含拖拽脚本**:拖拽脚本只在 `temp/` 阶段的 draft.html 里使用,**不要**写进 `template/`
 - **占位符约定**:
-  - 姓名 / 联系方式:`姓  名` / `+86 XXX XXXX XXXX`
+  - 姓名 / 联系方式:`姓  名` / `+86 138 0000 0000`
   - 学校 / 专业:`某某大学` / `某某专业`
   - 奖项:`XXX 一等奖(XXXX)`
-  - 公司 / 品牌:`某某公司` / `xx校园讲师`
+  - 公司 / 品牌:`某某公司` / `xx活动`
   - 日期:`XXXX.XX - XXXX.XX`
 
 ### 当前模板清单
@@ -186,6 +173,8 @@ JSON 格式:
 - Feature Request:说清楚解决什么问题、目标用户是谁、你的方案是什么
 - 模板建议:说明目标行业 / 风格,最好附参考样例
 
+> 注：由于本人对PR和Issue的流程并不熟悉，前面的要求由AI生成，实际以可读可理解为第一要求
+
 ---
 
 ## 🗂 目录结构
@@ -211,7 +200,7 @@ resume_polishing/
 
 ## 📄 许可证
 
-[MIT](./LICENSE) © 2026 余灿
+[MIT](./LICENSE) © 2026 xingmangHi
 
 详细的项目运行规则与异常处理见 [`RULES.md`](./RULES.md);给 AI agent 看的项目说明见 [`CLAUDE.md`](./CLAUDE.md)。
 
@@ -219,20 +208,5 @@ resume_polishing/
 
 ## 🙏 致谢
 
-- 模板设计参考了若干公开的简历排版样例(具体引用见各模板注释)
-- 拖拽自调的想法受 Figma / 即时设计等所见即所得工具启发
+- 模板设计参考了若干公开的简历排版样例
 - 工作流设计与 Claude Code / MiniMax Code 协作验证
-
----
-
-## 🗺 Roadmap
-
-- [ ] 加入更多行业模板(医疗 / 法律 / 设计 / 销售)
-- [ ] 拖拽脚本的 GC 与命名空间版本管理(详见 RULES.md §8)
-- [ ] 提供英文 README(`README.en.md`)
-- [ ] GitHub Actions 模板 HTML 语法校验
-- [ ] VSCode 插件:右键 Markdown → 一键转简历
-
----
-
-<sub>本项目采用 MIT 协议 — 欢迎 fork、修改、商用,只需保留版权声明即可。</sub>

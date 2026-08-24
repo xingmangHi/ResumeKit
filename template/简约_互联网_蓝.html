@@ -54,16 +54,16 @@
     body { font-size: 12px; line-height: 1.3; background: #fff; padding: 0; margin: 0; }
     .container { padding: 0; border: none; box-shadow: none; max-width: none; width: 100%; }
     .header { padding-bottom: 6px; border-bottom-width: 1px; }
-    .header-left .name { font-size: 28px; letter-spacing: 1.5px; }
-    .contact-row { font-size: 11px; gap: 4px; }
-    .contact-row .k { font-size: 9px; letter-spacing: 1.2px; }
+    .header-left .name { font-size: 26px; letter-spacing: 1.5px; }
+    .contact-row { font-size: 10.5px; gap: 3px; }
+    .contact-row .k { font-size: 9.5px; letter-spacing: 0.5px; }
     .contact-row .v { font-weight: 500; }
-    .contact-row .sep { margin: 0 3px; }
+    .contact-row .sep { margin: 0 2px; }
     .section { margin-top: 5px; page-break-inside: avoid; }
     .section-title { margin-bottom: 3px; gap: 6px; }
-    .section-title .text { font-size: 13px; letter-spacing: 1.5px; border-left-width: 5px; padding-left: 6px; }
+    .section-title .text { font-size: 13px; letter-spacing: 1.5px; border-left-width: 4px; padding-left: 6px; }
     .section-title .count { font-size: 9px; }
-    .section-title .bar { display: none; }
+    /* .bar 在屏幕端已 display:none，打印端无需再设 */
     .item { margin-top: 1px; }
     .item-title { font-size: 12.5px; }
     .item-date { font-size: 10px; }
@@ -88,21 +88,21 @@
 
   .container { max-width: 21cm; margin: 0 auto; }
 
-  /* ========== 头部：左大姓名，右联系方式单行（求职意向 | TEL | EMAIL） ========== */
+  /* ========== 头部：左大姓名，右联系方式单行（意向 | 电话 | 邮箱） ========== */
   .header {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 16px;
     align-items: end;
-    padding-bottom: 12px;
+    padding-bottom: 10px;
     border-bottom: 2px solid var(--primary);
   }
   .header-left .name {
-    font-size: 38px;
+    font-size: 36px;
     font-weight: 800;
     letter-spacing: 2px;
     line-height: 1;
-    color: var(--primary);
+    color: var(--text);
   }
   .header-right {
     display: flex;
@@ -113,23 +113,26 @@
   .contact-row {
     display: flex;
     align-items: baseline;
-    gap: 6px;
-    font-size: 12.5px;
+    gap: 4px;
+    font-size: 11.5px;
     flex-wrap: nowrap;
+    justify-content: flex-end;
+    white-space: nowrap;
   }
   .contact-item {
     display: inline-flex;
     align-items: baseline;
-    gap: 4px;
+    gap: 3px;
+    white-space: nowrap;
   }
   .contact-row .k {
     color: var(--muted);
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 10.5px;
   }
-  .contact-row .v { font-weight: 500; color: var(--text); }
-  .contact-row .sep { color: var(--divider); font-weight: 400; margin: 0 4px; }
+  .contact-row .v { font-weight: 500; color: var(--text); white-space: nowrap; }
+  .contact-row .sep { color: var(--divider); font-weight: 400; margin: 0 3px; }
 
   /* ========== 章节标题：左侧蓝竖条 + 蓝字 ========== */
   .section { margin-top: 14px; page-break-inside: avoid; }
@@ -139,22 +142,14 @@
     gap: 8px;
     margin-bottom: 8px;
   }
-  .section-title .bar {
-    display: inline-block;
-    width: 5px;
-    height: 15px;
-    min-height: 15px;
-    min-width: 5px;
-    background: var(--primary);
-    border-radius: 1px;
-    flex-shrink: 0;
-  }
+  /* .bar 已隐藏（避免与 .text 的 border-left 形成双竖线） */
+  .section-title .bar { display: none; }
   .section-title .text {
     font-size: 15px;
     font-weight: 800;
     letter-spacing: 2px;
-    color: var(--primary);
-    border-left: 5px solid var(--primary);
+    color: var(--text);
+    border-left: 4px solid var(--primary);
     padding-left: 8px;
   }
   .section-title .count {
@@ -176,7 +171,7 @@
   .item-title {
     font-size: 14.5px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--text);
   }
   .item-date {
     font-size: 11.5px;
@@ -210,8 +205,11 @@
     font-weight: 900;
   }
 
-  /* ========== 「:」前的文字加粗 + 蓝 ========== */
-  .prefix { font-weight: 700; color: var(--primary); }
+  /* ========== 「:」前的文字加粗（深色，蓝色只用于圆点） ========== */
+  .prefix { font-weight: 700; color: var(--text); }
+
+  /* ========== 正文加粗 <strong>（与 .prefix 同色，强调但不抢眼） ========== */
+  strong { font-weight: 700; color: var(--text); }
 
   /* ========== 技能卡：5 列横排（紧凑 1 行） ========== */
   .skills {
@@ -255,7 +253,7 @@
   .project-title {
     font-size: 14.5px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--text);
     flex: 1;
   }
   .project-tag {
@@ -311,11 +309,11 @@
     </div>
     <div class="header-right">
       <div class="contact-row" data-drag="1">
-        <span class="contact-item"><span class="k">求职意向</span><span class="v">职&nbsp;&nbsp;位</span></span>
+        <span class="contact-item"><span class="k">意向</span><span class="v">职&nbsp;&nbsp;位</span></span>
         <span class="sep">|</span>
-        <span class="contact-item"><span class="k">TEL</span><span class="v">+86 138 0000 0000</span></span>
+        <span class="contact-item"><span class="k">电话</span><span class="v">+86 138 0000 0000</span></span>
         <span class="sep">|</span>
-        <span class="contact-item"><span class="k">EMAIL</span><span class="v">name@example.com</span></span>
+        <span class="contact-item"><span class="k">邮箱</span><span class="v">name@example.com</span></span>
       </div>
     </div>
   </header>
