@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>简约_金融简历模板</title>
+<style>
+  /* ========== 主题色（黑） ========== */
+  :root {
+    --primary: #000000;
+    --text:    #000000;
+    --muted:   #6b7280;
+    --divider: #6b7280;          /* 偏灰 */
+    --bg:      #ffffff;
+    --paper:   #ffffff;
+  }
+
+  /* ========== 打印：A4，支持多页溢出 ========== */
+  @page { size: A4; margin: 1.5cm 1.2cm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 屏幕：模拟 A4 纸张，21cm × 29.7cm，带物理边线 ========== */
+  @media screen {
+    html { background: #888; }
+    body { background: #888; padding: 20px; }
+    .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1.5cm 1.2cm;         /* 与 @page margin 一致 */
+      background: var(--paper);
+      border: 1.5px solid #555;     /* A4 物理边界线 */
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+  }
+
+  /* ========== 打印：使用 @page，无边线 ========== */
+  @media print {
+    body { font-size: 14.5px; background: #fff; padding: 0; }
+    .section { page-break-inside: avoid; }
+  }
+
+  .container { max-width: 21cm; margin: 0 auto; }
+
+  /* ========== 头部 ========== */
+  .header { text-align: center; padding: 6px 0 18px; }
+  .name {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+  .contact { font-size: 16px; letter-spacing: 0.3px; }
+  .contact > span { white-space: nowrap; }
+  .contact > span:not(:last-child)::after { content: " | "; margin: 0 12px; }
+
+  /* ========== 章节 ========== */
+  .section { margin-top: 12px; page-break-inside: avoid; }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--divider);
+    margin-bottom: 14px;
+  }
+
+  /* ========== 条目：标题 ｜ 中部 ｜ 日期 — 三段平均分布 ========== */
+  .item { margin-top: 6px; }
+  .item-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: baseline;
+    font-weight: 700;
+  }
+  .item-title { text-align: left;   white-space: nowrap; }
+  .item-mid   { text-align: center; }
+  .item-date  { text-align: right;  white-space: nowrap; }
+
+  /* ========== 子项列表（▸） ========== */
+  .item-list { margin-top: 3px; padding-left: 2px; }
+  .item-list > div {
+    padding-left: 20px;
+    text-indent: -20px;
+  }
+  .item-list > div::before {
+    content: "▸";
+    font-size: 1.15em;
+    line-height: 1;
+    vertical-align: -1px;
+    margin-right: 8px;
+  }
+
+  /* ========== 「：」前的文字加粗 ========== */
+  .prefix { font-weight: 700; }
+
+  /* ========== 技能 / 自评（●） ========== */
+  .dot-list > div {
+    margin-top: 3px;
+    padding-left: 22px;
+    text-indent: -22px;
+  }
+  .dot-list > div::before {
+    content: "●";
+    font-size: 1.1em;
+    line-height: 1;
+    vertical-align: -1px;
+    margin-right: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 头部 ========== -->
+  <header class="header">
+    <div class="name">姓&nbsp;&nbsp;名</div>
+    <div class="contact">
+      <span><span class="prefix">手机</span>：138 0000 0000</span>
+      <span><span class="prefix">邮箱</span>：name@example.com</span>
+      <span><span class="prefix">求职意向</span>：财务</span>
+    </div>
+  </header>
+
+  <!-- ========== 教育背景 ========== -->
+  <section class="section">
+    <div class="section-title">教育背景</div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某某大学&nbsp;&nbsp;硕士</span>
+        <span class="item-mid">会计&nbsp;商学院</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">专业成绩</span>：GPA 3.5/4（专业前 20%）</div>
+        <div><span class="prefix">主修课程</span>：财务会计、国际财务报告准则研究、公司金融</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某某大学&nbsp;&nbsp;本科</span>
+        <span class="item-mid">经济学&nbsp;商学院</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">专业成绩</span>：GPA 3.6/4（专业前 20%）</div>
+        <div><span class="prefix">主修课程</span>：数学分析、金融经济学、国际金融学、企业财务报表处理与分析</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 工作经历 ========== -->
+  <section class="section">
+    <div class="section-title">工作经历</div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某会计师事务所</span>
+        <span class="item-mid">财务实习生&nbsp;XX 部门</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">账目核对</span>：协助会计师进行账目核对和凭证录入，通过仔细审核账目，确保财务数据的准确性，为准确编制财务报表提供支持。</div>
+        <div><span class="prefix">编制报表</span>：与财务团队紧密合作，收集并整理财务数据，准确计算财务指标和比率，确保报表的准确性和及时性。</div>
+        <div><span class="prefix">日常工作</span>：协助进行内部控制和风险评估工作，协助部门确保组织的财务运作符合规范，并提供有关改进措施的建议。</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某证券股份有限公司</span>
+        <span class="item-mid">财务实习生&nbsp;XX 部门</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">材料撰写</span>：参与撰写、修改多份募集说明书，计算并静态下沉金流等重要财务指标，核对财务重要数据。</div>
+        <div><span class="prefix">尽职调查</span>：协助项目组尽职调查，核查大类本宗议、关联交易、警示函处理情况。</div>
+        <div><span class="prefix">日常工作</span>：协助部门整理公告，借助 wind 收集数据、完成营销工作，做好日常的会议纪要等。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 校园经历 ========== -->
+  <section class="section">
+    <div class="section-title">校园经历</div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某某大学志愿服务中心</span>
+        <span class="item-mid">秘书部&nbsp;秘书长</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">组织和协调工作</span>：负责组织与协调秘书部的日常工作，与志愿者部门和其相关部门合作，确保志愿服务活动的顺利进行。</div>
+        <div><span class="prefix">文件管理和归档</span>：负责文件管理和归档工作，确保文件完整、分类和存档，以便日后查询和使用。</div>
+        <div><span class="prefix">志愿者培训和指导</span>：负责对新加入的志愿者进行培训和指导，使其了解志愿服务中心的工作原则和规范。同时，定期组织志愿者培训和工作会议，提升志愿者的专业素养和服务质量。</div>
+        <div><span class="prefix">团队管理和发现</span>：负责秘书部团队的管理和发展，包括招聘、培训和激励团队成员，建立良好的工作氛围和团队合作精神，实现团队目标和个人成长。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 项目经历 ========== -->
+  <section class="section">
+    <div class="section-title">项目经历</div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">企业财务优化项目</span>
+        <span class="item-mid">&nbsp;</span>
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">企业分析</span>：分析企业财务状况，识别潜在风险和问题，并撰写企业研究报告 2 份。</div>
+        <div><span class="prefix">优化流程</span>：协助实施改进措施，并监督效果。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 个人技能 ========== -->
+  <section class="section">
+    <div class="section-title">个人技能</div>
+    <div class="dot-list">
+      <div>熟练使用 office 办公软件</div>
+      <div>熟练掌握 C++、R、MATLAB、Python 等编程语言软件，熟练使用 wind、金蝶及友</div>
+      <div>英语：CET-6 596、CET-4 605</div>
+    </div>
+  </section>
+
+  <!-- ========== 自我评价 ========== -->
+  <section class="section">
+    <div class="section-title">自我评价</div>
+    <div class="dot-list">
+      <div>具备良好的数学和分析能力，能够快速理解和解决财务问题。熟悉财务报表的编制和财务分析的方法，能够准确地收集和整理财务数据，并进行数据分析和报告撰写。</div>
+      <div>能够与团队成员和其他部门有效合作。注重细节和准确性，对财务数据的准确性和可靠性有高度的责任心。</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
