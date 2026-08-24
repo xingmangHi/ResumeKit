@@ -1,4 +1,4 @@
-# Resume Polishing · 简历排版项目
+# ResumeKit · 简历模板工具包
 
 > 把 Markdown / HTML 简历源文件做成 A4 简历,支持浏览器内拖拽自调、零依赖、零服务、隐私隔离。
 
@@ -6,7 +6,7 @@
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)
 ![Platform: Browser](https://img.shields.io/badge/platform-browser-lightgrey.svg)
 
-如果你使用 Markdown 编辑好了一份简历的文字内容，但苦于怎么更好的展现，这个简历排版项目一定适合你
+如果你使用 Markdown 编辑好了一份简历的文字内容，但苦于怎么更好的展现，这个 ResumeKit 一定适合你
 
 
 ---
@@ -43,8 +43,8 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/xingmangHi/resume_polishing.git
-cd resume_polishing
+git clone https://github.com/xingmangHi/ResumeKit.git
+cd ResumeKit
 
 # 2. 在浏览器里打开任意一份模板看效果
 # Windows
@@ -175,7 +175,7 @@ JSON 格式:
 ## 🗂 目录结构
 
 ```
-resume_polishing/
+ResumeKit/
 ├── .claude/                  # 技能库(AI 协作能力定义,本项目用 zhanlincui-ui-ux-pro-max)
 ├── docs/                     # 项目说明与预览截图
 │   └── screenshots/          # README 引用的预览图

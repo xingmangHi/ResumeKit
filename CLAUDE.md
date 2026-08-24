@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 目录架构
 
 ```
-resume_polishing/
+ResumeKit/
 ├── .claude/skills/     # 技能库（当前含 zhanlincui-ui-ux-pro-max）
 ├── source/             # 用户源文件，只读
 ├── template/           # 模板库，按「风格_行业_主色调.html」命名
@@ -118,7 +118,7 @@ temp 目录下 `draft.html` 末尾会内联一段纯 vanilla JS 拖拽脚本（�
 Git Bash on Windows 中打开 HTML：
 
 ```bash
-start "C:\Claude\resume_polishing\temp\2026-06-19-14-30\draft.html"
+start "C:\path\to\ResumeKit\temp\2026-06-19-14-30\draft.html"
 ```
 
 或在文件资源管理器中双击 HTML 文件。
