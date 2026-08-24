@@ -1,3 +1,7 @@
+# 隐私目录:忽略所有内容,但保留目录壳子(白名单 .gitkeep)
 source/*
+!source/.gitkeep
 temp/*
+!temp/.gitkeep
 prospect/*
+!prospect/.gitkeep
