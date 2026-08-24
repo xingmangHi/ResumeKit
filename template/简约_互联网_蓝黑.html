@@ -2,14 +2,15 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>简约_互联网_蓝简历模板</title>
+<title>简约_互联网_蓝黑简历模板</title>
 <style>
-  /* ========== 主题色（蓝，派生自 简约_互联网_黑） ========== */
+  /* ========== 主题色（蓝黑 = 蓝点缀 + 黑文字，参考 draft 配色） ========== */
   :root {
-    --primary:       #2563eb;
-    --primary-dark:  #1d4ed8;
-    --primary-soft:  #dbeafe;
-    --text:          #111827;
+    --primary:       #2563eb;   /* 蓝 — 用于边框、圆点、项目标签底、链接 */
+    --primary-dark:  #1d4ed8;   /* 深蓝 — 项目标签文字 */
+    --primary-soft:  #dbeafe;   /* 浅蓝 — 项目标签底色 */
+    --ink:           #000000;   /* 黑 — 标题、姓名、前缀、强调文字 */
+    --text:          #111827;   /* 正文色（深灰，几乎黑） */
     --muted:         #6b7280;
     --divider:       #e5e7eb;
     --tag-bg:        #f3f4f6;
@@ -102,7 +103,7 @@
     font-weight: 800;
     letter-spacing: 2px;
     line-height: 1;
-    color: var(--text);
+    color: var(--ink);
   }
   .header-right {
     display: flex;
@@ -134,7 +135,7 @@
   .contact-row .v { font-weight: 500; color: var(--text); white-space: nowrap; }
   .contact-row .sep { color: var(--divider); font-weight: 400; margin: 0 3px; }
 
-  /* ========== 章节标题：左侧蓝竖条 + 蓝字 ========== */
+  /* ========== 章节标题：左侧蓝色竖条 + 黑色标题字 ========== */
   .section { margin-top: 14px; page-break-inside: avoid; }
   .section-title {
     display: flex;
@@ -148,7 +149,7 @@
     font-size: 15px;
     font-weight: 800;
     letter-spacing: 2px;
-    color: var(--text);
+    color: var(--ink);
     border-left: 4px solid var(--primary);
     padding-left: 8px;
   }
@@ -171,7 +172,7 @@
   .item-title {
     font-size: 14.5px;
     font-weight: 700;
-    color: var(--text);
+    color: var(--ink);
   }
   .item-date {
     font-size: 11.5px;
@@ -205,11 +206,11 @@
     font-weight: 900;
   }
 
-  /* ========== 「:」前的文字加粗（深色，蓝色只用于圆点） ========== */
-  .prefix { font-weight: 700; color: var(--text); }
+  /* ========== 「:」前的文字加粗（黑色，蓝色只用于圆点） ========== */
+  .prefix { font-weight: 700; color: var(--ink); }
 
   /* ========== 正文加粗 <strong>（与 .prefix 同色，强调但不抢眼） ========== */
-  strong { font-weight: 700; color: var(--text); }
+  strong { font-weight: 700; color: var(--ink); }
 
   /* ========== 技能卡：5 列横排（紧凑 1 行） ========== */
   .skills {
@@ -253,7 +254,7 @@
   .project-title {
     font-size: 14.5px;
     font-weight: 700;
-    color: var(--text);
+    color: var(--ink);
     flex: 1;
   }
   .project-tag {
@@ -305,10 +306,10 @@
   <!-- ========== 头部 ========== -->
   <header class="header">
     <div class="header-left">
-      <div class="name" data-drag="1">姓&nbsp;&nbsp;名</div>
+      <div class="name">姓&nbsp;&nbsp;名</div>
     </div>
     <div class="header-right">
-      <div class="contact-row" data-drag="1">
+      <div class="contact-row">
         <span class="contact-item"><span class="k">意向</span><span class="v">职&nbsp;&nbsp;位</span></span>
         <span class="sep">|</span>
         <span class="contact-item"><span class="k">电话</span><span class="v">+86 138 0000 0000</span></span>
@@ -319,112 +320,134 @@
   </header>
 
   <!-- ========== 教育背景 ========== -->
-  <section class="section" data-drag="1">
+  <section class="section">
     <div class="section-title">
       <span class="bar"></span>
-      <span class="text" data-drag="1">教育背景</span>
+      <span class="text">教育背景</span>
       <span class="count">EDUCATION</span>
     </div>
     <div class="item">
       <div class="item-head">
-        <span class="item-title" data-drag="1">学校 · 学历 · 专业</span>
-        <span class="item-date" data-drag="1">YYYY.MM - YYYY.MM</span>
+        <span class="item-title">某某大学 · 本科</span>
+        <span class="item-date">XXXX.XX - XXXX.XX</span>
       </div>
-      <div class="item-sub" data-drag="1">方向 · 标签</div>
+      <div class="item-sub">某某专业 · XX 标签</div>
       <div class="item-list">
-        <div data-drag="1"><span class="prefix">个人荣誉</span>：占位描述</div>
+        <div><span class="prefix">个人荣誉</span>：XXX 比赛 <strong>XXX 一等奖(XXXX)</strong>；XXX 比赛 <strong>XXX 二等奖(XXXX)</strong>；XXX 证书；XXX 聘书</div>
       </div>
     </div>
   </section>
 
   <!-- ========== 实习经历 ========== -->
-  <section class="section" data-drag="1">
+  <section class="section">
     <div class="section-title">
       <span class="bar"></span>
-      <span class="text" data-drag="1">实习经历</span>
+      <span class="text">实习经历</span>
       <span class="count">EXPERIENCE</span>
     </div>
     <div class="item">
       <div class="item-head">
-        <span class="item-title" data-drag="1">公司名称</span>
-        <span class="item-date" data-drag="1">YYYY.MM - YYYY.MM</span>
+        <span class="item-title">某某公司</span>
+        <span class="item-date">XXXX.XX - XXXX.XX</span>
       </div>
-      <div class="item-sub" data-drag="1">岗位 · 部门</div>
+      <div class="item-sub">实习生 · 部门</div>
+      <div class="item-sub">主导新硬件产品从需求到样机验证的全流程开发，主导 LTE Cat.1 模组 + 多传感器系统的可行性验证与原型搭建</div>
       <div class="item-list">
-        <div data-drag="1"><span class="prefix">职责一</span>：占位描述</div>
-        <div data-drag="1"><span class="prefix">职责二</span>：占位描述</div>
+        <div><span class="prefix">SDK 移植</span>：基于 xx品牌 LTE Cat.1 模组的 openMCU 框架，完成 SDK 移植、烧录与调试流程跑通；通过电话与原厂工程师对接 IO 余量、接口资源、调试方式</div>
+        <div><span class="prefix">系统架构</span>：基于 PRD 拆解功能需求，确定"以 LTE Cat.1 模组为主控 + SPI / I2S / I2C 接口连接陀螺仪 / 音频编解码 / NFC 模拟芯片"的系统架构</div>
+        <div><span class="prefix">验证 Demo</span>：使用 MPU6050 陀螺仪模块和 INMP441 麦克风模块，配合 ESP32-C5 主控设计并制作功能验证 PCB，完成陀螺仪数据记录、算法验证、麦克风可行性测试</div>
+        <div><span class="prefix">资源评估</span>：完成 RAM / ROM 预估，确认主控资源可承载核心算法</div>
       </div>
     </div>
   </section>
 
   <!-- ========== 项目经验 ========== -->
-  <section class="section" data-drag="1">
+  <section class="section">
     <div class="section-title">
       <span class="bar"></span>
-      <span class="text" data-drag="1">项目经验</span>
+      <span class="text">项目经验</span>
       <span class="count">PROJECTS</span>
     </div>
 
     <div class="project-card">
       <div class="project-head">
-        <span class="project-title" data-drag="1">项目名称</span>
-        <span class="project-tag" data-drag="1">角色</span>
-        <span class="project-date" data-drag="1">YYYY</span>
+        <span class="project-title">某某项目</span>
+        <span class="project-tag">独立开发</span>
+        <span class="project-date">XXXX</span>
       </div>
-      <div class="project-meta" data-drag="1">简介 · <span class="tech">技术栈</span></div>
-      <div class="project-desc" data-drag="1">项目描述占位</div>
+      <div class="project-meta">智能摆件 · <span class="tech">ESP32-P4（双核 RISC-V）· ESP-IDF · ESP-DL · FreeRTOS · WSL</span>&nbsp;·&nbsp;<a class="project-link" href="https://github.com/your-name/your-repo" target="_blank" rel="noopener">github.com/your-name/your-repo</a></div>
+      <div class="project-desc">本地实现人脸检测 + 提醒播放，<strong>全程不上云、零网络依赖</strong>。使用 ESP32-P4 双核 RISC-V 集成开发板，基于 ESP-IDF（FreeRTOS 内核）+ WSL Linux 虚拟环境，使用 <strong>ESP-DL</strong> 组件导入官方人脸检测模型</div>
       <div class="item-list">
-        <div data-drag="1"><span class="prefix">贡献一</span>：占位描述</div>
+        <div><span class="prefix">端侧 AI 集成</span>：基于 ESP-DL 框架集成官方人脸检测模型，<strong>跑通"图像采集 → 预处理 → 模型推理 → 结果处理"完整链路</strong>；结合官方示例与项目需求完成模型调用、参数配置与功能集成</div>
+        <div><span class="prefix">多任务调度</span>：基于 ESP-IDF（FreeRTOS 内核）实现多模块协同，涵盖图像采集、模型推理、音频播放、SD 卡存储等模块的并发运行；通过任务优先级与同步机制避免阻塞</div>
+        <div><span class="prefix">低功耗设计</span>：空闲时进入 <strong>Light-Sleep 状态</strong>，<strong>整体功耗从 0.8W 降至 0.3W（降低 62.5%）</strong>；通过休眠策略平衡实时性与功耗</div>
+        <div><span class="prefix">AI 协作</span>：用 AI 辅助生成基础代码框架与逻辑验证，本人完成功能整合、调试、bug 修复与性能调优；建立<strong>项目级 AGENT / RULES / NOTES / IDEA 规则体系</strong>管理 AI 协作</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-title">某某项目</span>
+        <span class="project-tag">软件 · 调试</span>
+        <span class="project-date">XXXX</span>
+      </div>
+      <div class="project-meta">XXX 比赛 · XXX 组 · <span class="tech">STC32G144K246（增强型 8051 内核）· xx品牌驱动库 · C / Keil C251 · 大津法二值化 + PID 控制 · 摄像头图像处理</span></div>
+      <div class="project-desc">完全自主制作摄像头单感知传感器智能车，完成赛道循迹、元素判断、靶环识别、避障等任务，并以高于 3 m/s 的速度在赛道上完整运行</div>
+      <div class="item-list">
+        <div><span class="prefix">整机外设</span>：基于 xx品牌驱动库，编写 Timer 中断、GPIO 中断读取、状态循环、SPI 屏幕显示、I2C 陀螺仪读取</div>
+        <div><span class="prefix">图像优化</span>：将 188×120 图像通过<strong>平均映射</strong>为 80×60 像素，并优化大津法二值化算法与浮点类型使用，将图像处理<strong>帧率从约 80 帧提升至 120 帧</strong></div>
+        <div><span class="prefix">参数调试</span>：调整图像曝光增益以完整区分赛道和靶环，调整以 PID 为核心的参数，让车辆<strong>以 3.5 m/s 速度行驶赛道、以 3.3 m/s 完成识别与激光打靶任务</strong></div>
+        <div><span class="prefix">调试反馈</span>：根据车辆在赛道上的运行情况，判断故障与参数调整方向，复现调整情形并与队友沟通反馈</div>
       </div>
     </div>
   </section>
 
   <!-- ========== 实践经历 ========== -->
-  <section class="section" data-drag="1">
+  <section class="section">
     <div class="section-title">
       <span class="bar"></span>
-      <span class="text" data-drag="1">实践经历</span>
+      <span class="text">实践经历</span>
       <span class="count">PRACTICE</span>
     </div>
     <div class="item">
       <div class="item-head">
-        <span class="item-title" data-drag="1">实践名称</span>
-        <span class="item-date" data-drag="1">YYYY</span>
+        <span class="item-title">xx活动 校园讲师</span>
+        <span class="item-date">XXXX</span>
       </div>
-      <div class="item-sub" data-drag="1">角色</div>
+      <div class="item-sub">独立带训 30+ 学员</div>
       <div class="item-list">
-        <div data-drag="1">占位描述</div>
+        <div>作为 xx活动 校园讲师，独立带训 30+ 名学员，覆盖 PCB 原理图设计、Layout 布线、焊接调试全流程；培训内容含理论讲解、实操演示、焊接指导和调试</div>
       </div>
     </div>
   </section>
 
   <!-- ========== 专业技能 ========== -->
-  <section class="section" data-drag="1">
+  <section class="section">
     <div class="section-title">
       <span class="bar"></span>
-      <span class="text" data-drag="1">专业技能</span>
+      <span class="text">专业技能</span>
       <span class="count">SKILLS</span>
     </div>
     <div class="skills">
-      <div class="skill" data-drag="1">
-        <div class="skill-name" data-drag="1">CAT1</div>
-        <div class="skill-desc" data-drag="1">占位描述 1</div>
+      <div class="skill">
+        <div class="skill-name">CAT1</div>
+        <div class="skill-desc">C / C++，熟悉 STM32 / ESP32（ESP-IDF）/ STM8 / STC32（增强 8051），裸机 + FreeRTOS</div>
       </div>
-      <div class="skill" data-drag="1">
-        <div class="skill-name" data-drag="1">CAT2</div>
-        <div class="skill-desc" data-drag="1">占位描述 2</div>
+      <div class="skill">
+        <div class="skill-name">CAT2</div>
+        <div class="skill-desc">UART / I2C / SPI / I2S / SDIO / CAN，有多传感器系统集成经验</div>
       </div>
-      <div class="skill" data-drag="1">
-        <div class="skill-name" data-drag="1">CAT3</div>
-        <div class="skill-desc" data-drag="1">占位描述 3</div>
+      <div class="skill">
+        <div class="skill-name">CAT3</div>
+        <div class="skill-desc">建立项目级 AGENT / RULES 规则体系，能用 AI 工具显著提升开发效率</div>
       </div>
-      <div class="skill" data-drag="1">
-        <div class="skill-name" data-drag="1">CAT4</div>
-        <div class="skill-desc" data-drag="1">占位描述 4</div>
+      <div class="skill">
+        <div class="skill-name">CAT4</div>
+        <div class="skill-desc">示波器 / 逻辑分析仪 / 万用表、EDA 工具、原理图 + Layout</div>
       </div>
-      <div class="skill" data-drag="1">
-        <div class="skill-name" data-drag="1">CAT5</div>
-        <div class="skill-desc" data-drag="1">占位描述 5</div>
+      <div class="skill">
+        <div class="skill-name">CAT5</div>
+        <div class="skill-desc">Git、WSL / Linux 基础、CMake 构建系统</div>
       </div>
     </div>
   </section>

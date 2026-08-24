@@ -59,7 +59,7 @@ xdg-open template/简约_互联网_黑.html
 # 3. 复制已有的Markdown格式简历到 `source/` 文件夹下
 
 # 4. 使用你的Agent代理打开文件夹
-
+```
 ---
 
 ## 📖 使用方法
