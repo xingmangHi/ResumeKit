@@ -6,7 +6,8 @@
 ![Dependencies: 0](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)
 ![Platform: Browser](https://img.shields.io/badge/platform-browser-lightgrey.svg)
 
-如果你使用Markdown编辑好了一份简历的文字内容，但苦于怎么更好的展现，这个简历排版项目一定适合你
+如果你使用 Markdown 编辑好了一份简历的文字内容，但苦于怎么更好的展现，这个简历排版项目一定适合你
+
 （如果模板和配色没有喜欢或合适的，可以和AI交流让其基于模板修改新的）
 
 ---
@@ -38,7 +39,7 @@
 - 任意现代浏览器(Chrome / Edge / Firefox / Safari 任一)
 - 任意文本编辑器(VSCode / Sublime / 记事本都行)
 - 无需 Node.js、无需 Python、无需任何构建工具
-- 任意能够在本地运行的Agent代理
+- 任意能够进行本地文件读写的 Agent 代理
 
 ### 5 分钟上手
 
@@ -118,12 +119,8 @@ JSON 格式:
 - **零外部资源**:不用 CDN 字体、不用外链图片,所有资源内联
 - **CSS 变量**:颜色、间距、字号等用 CSS 变量定义(便于复用)
 - **不含拖拽脚本**:拖拽脚本只在 `temp/` 阶段的 draft.html 里使用,**不要**写进 `template/`
-- **占位符约定**:
-  - 姓名 / 联系方式:`姓  名` / `+86 138 0000 0000`
-  - 学校 / 专业:`某某大学` / `某某专业`
-  - 奖项:`XXX 一等奖(XXXX)`
-  - 公司 / 品牌:`某某公司` / `xx活动`
-  - 日期:`XXXX.XX - XXXX.XX`
+- **占位符约定**:见 [`RULES.md` §1.2.1](./RULES.md)
+- **Markdown 标签样式**:`<strong>` / `<em>` / `<code>` / `<a>` / `<blockquote>` 等语义标签必须有基础样式,见 [`RULES.md` §1.6.9](./RULES.md)
 
 ### 当前模板清单
 
