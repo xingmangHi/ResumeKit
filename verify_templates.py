@@ -2,6 +2,12 @@
 """可靠的模板CSS和HTML验证
 运行: cd /workspace && python3 verify_templates.py
 依赖: pip install tinycss2 beautifulsoup4 html5lib
+
+局限性:
+- 非完整CSS引擎，仅用正则检测常见覆盖模式
+- 不验证CSS变量计算、媒体查询条件、选择器优先级
+- 不模拟浏览器渲染，实际效果需浏览器验证
+- git show main: 需存在main分支且包含对应文件
 """
 import sys
 import re
@@ -67,8 +73,8 @@ def check_geometry_overrides(css_text):
                         matches = re.finditer(rf'([.#\w-]+)\s*{{[^}}]*(?<!min-|max-){prop}\s*:[^}}]*}}', content)
                         for m in matches:
                             selector = m.group(1)
-                            # 已知必要例外: 重置body/html, container/paper几何
-                            if selector not in ['.container', '.paper', 'body', 'html']:
+                            # 必要例外: body/html重置；.page/.container几何声明不在此检查
+                            if selector not in ['body', 'html', '.page']:
                                 overrides.append(f"print中{prop}覆盖: {selector}")
     
     return overrides
@@ -122,16 +128,17 @@ def check_selector_match(html_path, selectors):
 
 def compare_html_with_main(template_path):
     """对比HTML与main的正文"""
-    # 从git获取main版本
+    # 从git获取main版本（使用相对于repo根的路径）
     import subprocess
     try:
+        rel_path = template_path.relative_to(template_path.parent.parent)
         main_html = subprocess.check_output(
-            ['git', 'show', f'main:{template_path}'],
-            cwd=template_path.parent.parent,
+            ['git', 'show', f'main:{rel_path}'],
+            cwd=str(template_path.parent.parent),
             stderr=subprocess.DEVNULL
         ).decode('utf-8')
-    except:
-        return {'available': False}
+    except Exception as e:
+        return {'available': False, 'error': str(e)}
     
     with open(template_path, 'r', encoding='utf-8') as f:
         current_html = f.read()
@@ -260,7 +267,8 @@ def verify_template(template_path):
         if not comparison['classes_match'] and comparison['classes_diff']:
             print(f"⚠️ 新增class: {comparison['classes_diff']}")
     else:
-        print("⚠️ 无法获取main版本对比")
+        err_msg = comparison.get('error', '未知')
+        print(f"❌ 无法获取main版本对比: {err_msg}")
         issues.append('无main基准')
     
     return {

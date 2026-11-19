@@ -1,30 +1,30 @@
 # 模板修正状态报告
 
-**报告时间**: 2026-11-19 07:52 UTC
+**报告时间**: 2026-11-19 08:18 UTC
 **基准 commit**: main/69b1be3 (feat: 新增读研专用简历模板)
-**审核 commit**: 928185be36a7d2f12617307d1afd67ec41183064 (fix: 修正残留静态问题)
+**最新测试 commit**: ee451ddcc8f9703a7d9a7d3bd4bb6eecb74a561d (fix: 4个多页模板改用真实分页DOM)
 
 ---
 
 ## 模板修正清单
 
-| 模板 | 静态CSS | HTML保真 | 链接保留 | 选择器命中 | 待动态验证 |
-|------|--------|---------|---------|-----------|-----------|
-| 商务_互联网_蓝 | ✅ | ✅ | ✅ (0个) | ✅ | 浏览器测量 |
-| 清新_教师_紫 | ✅ | ✅ | ✅ (0个) | ✅ h2(8) | 浏览器测量 |
-| 简约_互联网_蓝黑 | ✅ | ✅ | ✅ (1个) | ✅ | 浏览器测量 |
-| 简约_互联网_黑 | ✅ | ✅ | ✅ (0个) | ✅ | 浏览器测量 |
-| 简约_制造业_紫 | ✅ | ✅ | ✅ (0个) | ✅ | 浏览器测量 |
-| 简约_文化传媒_蓝 | ✅ | ✅ | ✅ (0个) | ✅ | 浏览器测量+双层 |
-| 简约_读研_蓝 | ✅ | ✅ | ✅ (0个) | ✅ h2(4) | 浏览器测量 |
-| 简约_金融_黑 | ✅ | ✅ | ✅ (0个) | ✅ | 浏览器测量 |
+| 模板 | 静态CSS | HTML保真 | 浏览器测试 | 最新commit |
+|------|--------|---------|-----------|-----------|
+| 商务_互联网_蓝 | ✅ | ✅ | 单页 | ee451dd |
+| 清新_教师_紫 | ✅ | ✅ | 单页 | ee451dd |
+| 简约_互联网_蓝黑 | ✅ | ✅ | 2页（真实分页） | ee451dd |
+| 简约_互联网_黑 | ✅ | ✅ | 2页（真实分页） | ee451dd |
+| 简约_制造业_紫 | ✅ | ✅ | 2页（真实分页） | ee451dd |
+| 简约_文化传媒_蓝 | ✅ | ✅ | 单页（padding共享） | ee451dd |
+| 简约_读研_蓝 | ✅ | ✅ | 单页 | ee451dd |
+| 简约_金融_黑 | ✅ | ✅ | 2页（真实分页） | ee451dd |
 
 **说明**：
-- **静态CSS**：tinycss2递归解析通过，无语法错误，无print字号/颜色覆盖，无整章page-break-inside
-- **HTML保真**：style外正文与main完全一致（BeautifulSoup对比）
-- **链接保留**：所有`<a href>`与main一致
-- **选择器命中**：print分页选择器命中实际HTML元素（数量见详情）
-- **待动态验证**：需浏览器开发者工具测量实际渲染高度、溢出、PDF页数
+- **静态CSS**：verify_templates.py检测通过（局限性：非完整CSS引擎）
+- **HTML保真**：正文/链接与main一致（verify_templates.py BeautifulSoup对比）
+- **浏览器测试**：Chromium Playwright验证，screen固定297mm/页，PDF页数与screen一致
+- **最新commit**: ee451dd = 4个多页模板改用真实.page容器；文化传媒padding共享
+- **待管理员复核**：PDF末页墨迹边距、文本完整性（离线人工验证）
 
 ---
 
@@ -44,6 +44,11 @@ pip install tinycss2 beautifulsoup4 html5lib cssselect2
 4. 检查通用和media规则中`.section { page-break-inside: avoid }`
 5. BeautifulSoup选择器验证分页规则命中HTML元素
 6. 对比main blob的HTML正文（style外）和所有`<a href>`
+
+**局限性**：
+- 非完整CSS引擎，仅用正则检测常见覆盖模式
+- 不验证CSS变量计算、媒体查询条件、选择器优先级
+- 不模拟浏览器渲染，实际效果需浏览器验证
 
 **运行**：
 ```bash
@@ -169,25 +174,11 @@ print规则已修正为`h2 { break-after: avoid; }`
 h2 { break-after: avoid; }
 ```
 
-#### 3. 文化传媒双层几何统一（commit 928185b）
+#### 3. 文化传媒padding共享（commit 173130a, ee451dd）
 
-**问题**：`.paper`的`min-height: calc(297mm - 32px)`在通用规则，screen margin 16px, print margin 0，几何不共享
+**问题**：screen padding 16px, print padding 0，导致PDF与screen坐标不一致
 
-**修正**：
-```css
-/* 通用 */
-.paper {
-  height: calc(297mm - 32px);  /* 固定，非min-height */
-  margin: 16px;
-  overflow: visible;
-}
-
-/* @media print */
-.paper {
-  margin: 0;
-  height: 297mm;  /* 补偿margin */
-}
-```
+**修正**：将`padding: 16px`移到`.container`通用规则，screen/print共享
 
 #### 4. 移除读研链接颜色print覆盖（commit 928185b）
 
@@ -322,7 +313,7 @@ print:
 
 ### ❌ 不声称
 
-- "排版精确A4"（需实测）
+- "排版符合A4"（Chromium输出595.92×842.88pt，偏差0.64×0.99pt，原因未解决）
 - "无溢出"（需测量坐标）
 - "强制1页"（未压缩）
 - "所有选择器在所有模板存在"（已标注各自差异）

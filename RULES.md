@@ -128,10 +128,12 @@
 - 一份最终交付**对应一份** HTML，**禁止**存放中间过程文件
 - 不存 PDF（PDF 由用户自行从 HTML 导出）
 
-### 1.5 `.claude/skills/` — 技能
+### 1.5 `.claude/skills/` — 技能库
 
-- 仅放已安装、已验证可用的 skill
+- 项目技能库统一存放在 `.claude/skills/` 目录
+- 仅放已安装、已验证可用的 skill（如当前的 zhanlincui-ui-ux-pro-max）
 - 不要在 `skills/` 下存放个人数据或草稿
+- 第三方技能包保持其原始README等资源文件
 
 ### 1.6 模板结构规范（强制）
 
