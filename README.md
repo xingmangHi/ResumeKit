@@ -37,7 +37,6 @@
 - 任意现代浏览器(Chrome / Edge / Firefox / Safari 任一)
 - 任意文本编辑器(VSCode / Sublime / 记事本都行)
 - 无需 Node.js、无需 Python、无需任何构建工具
-- 任意能够进行本地文件读写的 Agent 代理
 
 ### 5 分钟上手
 
@@ -54,25 +53,58 @@ open template/简约_互联网_黑.html
 # Linux
 xdg-open template/简约_互联网_黑.html
 
-# 3. 复制已有的Markdown格式简历到 `source/` 文件夹下
+# 3. 复制已有的 Markdown 格式简历到 `source/` 文件夹下
 
-# 4. 使用你的Agent代理打开文件夹
+# 4. 使用 AI 协作（见下方"AI 协作使用"章节）
+```
+
+---
+
+## 🤖 AI 协作使用
+
+ResumeKit 提供通用的 **简历美化 Skill**，适用于各类 AI 产品。
+
+### Skill 文件位置
+
+- **主入口**：`SKILL.md` — 工具无关、简洁可执行
+- **完整规则**：`RULES.md` — 简历业务规则权威源
+
+### 不同 AI 产品的使用方法
+
+**重要**：并非所有 AI 产品都会自动发现或读取 Skill 文件。
+
+| AI 产品 | 使用方法 | 支持情况 |
+|---------|---------|---------|
+| **Cursor** | 在 Chat 中 @ 引用 `SKILL.md` 或根目录，或直接要求 AI 阅读 | 需手动引用 |
+| **Claude Code** | 可能自动读取 `.claude/skills/` 下的 Skill（需验证） | 部分自动 |
+| **其他 AI** | 在对话中明确要求 AI 阅读 `SKILL.md` 和 `RULES.md` | 通常需手动 |
+
+### 推荐使用步骤
+
+1. **手动引用**：在对话开始时明确要求 AI 阅读 `SKILL.md` 和 `RULES.md`
+2. **能力确认**：要求 AI 声明具备的能力（文件操作、浏览器渲染、PDF 生成等）
+3. **规则确认**：要求 AI 确认已理解核心约束（内容保真、A4 固定、共享布局等）
+
+示例对话开场：
+
+```
+请阅读 SKILL.md 和 RULES.md，声明你具备的能力（文件操作、浏览器、PDF 生成），
+然后帮我美化 source/my-resume.md 这份简历。
 ```
 ---
 
 ## 📖 使用方法
 
-### 工作流概览(4 轮确认 + 1 步自调)
+### 工作流概览
 
 ```
-1. 与 AI 确认:风格 / 行业 / 颜色 / 布局 / 页数 / 照片 / 联系方式
-2. 确认:字段抽取结果 + 模板选择 + temp 目录名
-3. [可选] 在浏览器里拖拽自调,导出 JSON
-4. AI 应用你的 JSON 调整,复述给你确认
-5. 最终:确认成品文件名 + temp 清理 + 模板沉淀
+1. 启动确认:风格 / 行业 / 颜色 / 布局 / 页数 + 字段抽取 + 模板选择
+2. 制作与调整:填充数据、协调排版
+3. [可选] 浏览器自调:拖拽、编辑、导出 JSON
+4. 交付确认:最终 HTML + 检查结果 + 文件名
 ```
 
-> 详细规则与异常处理见 [`RULES.md`](./RULES.md)。给 AI agent 看的项目说明见 [`CLAUDE.md`](./CLAUDE.md)。
+> 详细规则见 [`RULES.md`](./RULES.md)。AI 协作入口见 [`SKILL.md`](./SKILL.md)。
 
 ### 拖拽脚本速查
 
@@ -181,7 +213,6 @@ JSON 格式:
 
 ```
 ResumeKit/
-├── .claude/                  # 技能库(AI 协作能力定义,本项目用 zhanlincui-ui-ux-pro-max)
 ├── docs/                     # 项目说明与预览截图
 │   └── screenshots/          # README 引用的预览图
 ├── source/                   # 你的简历源文件(.md / .html),不入 git
@@ -191,8 +222,9 @@ ResumeKit/
 ├── prospect/                 # 最终成品 HTML(可直接打印 / 导出 PDF),不入 git
 │   └── .gitkeep
 ├── template/                 # 模板库(单文件 HTML,纯 HTML/CSS,无脚本)
-├── CLAUDE.md                 # 给 AI agent 看的项目说明
-├── RULES.md                  # 强制性规则(冲突时以 RULES.md 为准)
+├── SKILL.md                  # AI 简历美化 Skill 主入口
+├── AGENTS.md                 # 仓库维护简要指南
+├── RULES.md                  # 简历业务规则权威源(强制)
 ├── README.md                 # 本文件
 ├── LICENSE                   # MIT License
 └── .gitignore                # 隐私目录 + .gitkeep 白名单
@@ -209,7 +241,7 @@ ResumeKit/
 
 [MIT](./LICENSE) © 2026 xingmangHi
 
-详细的项目运行规则与异常处理见 [`RULES.md`](./RULES.md);给 AI agent 看的项目说明见 [`CLAUDE.md`](./CLAUDE.md)。
+详细的项目运行规则与异常处理见 [`RULES.md`](./RULES.md)，AI 协作入口见 [`SKILL.md`](./SKILL.md)。
 
 ---
 
@@ -234,5 +266,4 @@ ResumeKit/
 ## 🙏 致谢
 
 - 模板设计参考了若干公开的简历排版样例
-- 工作流设计与 Claude Code / MiniMax Code 协作验证
-- A4 正文区校准规范基于 2026-11 ResumeKit 优化群的测试与诊断
+- 工作流设计经过多轮 AI 协作验证
