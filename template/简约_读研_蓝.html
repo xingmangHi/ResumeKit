@@ -17,8 +17,8 @@
     --paper:         #ffffff;
   }
 
-  /* ========== 打印：A4（紧凑边距，强制 1 页） ========== */
-  @page { size: A4; margin: 0.6cm 0.7cm; }
+  /* ========== 打印：A4 ========== */
+  @page { size: A4 portrait; margin: 0; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,30 +34,38 @@
     font-feature-settings: "tnum" 1;
   }
 
-  /* ========== 屏幕：A4 模拟 ========== */
+  /* ========== 通用：固定 A4 纸张盒 ========== */
+  .container {
+    width: 210mm;
+    height: 297mm;
+    padding: 0.75cm 0.8cm;
+    background: var(--paper);
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* ========== 屏幕：外装饰 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
     .container {
-      width: 21cm;
-      min-height: 29.7cm;
-      padding: 0.75cm 0.8cm;
-      background: var(--paper);
-      border: 1.5px solid #555;
+      outline: 1.5px solid #555;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      margin: 0 auto;
     }
   }
 
-  /* ========== 打印微调 ========== */
+  /* ========== 打印：移除外装饰，细粒度分页 ========== */
   @media print {
-    body { font-size: 13px; line-height: 1.75; background: #fff; padding: 0; margin: 0; }
-    .container { padding: 0; border: none; box-shadow: none; max-width: none; width: 100%; }
-    .section { page-break-inside: avoid; }
-    .item { page-break-inside: avoid; }
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .container {
+      outline: none;
+      box-shadow: none;
+    }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+    .header { break-after: avoid; }
   }
-
-  .container { max-width: 21cm; margin: 0 auto; }
 
   /* ========== 头部 ========== */
   .header {
