@@ -34,10 +34,10 @@
     font-feature-settings: "tnum" 1;
   }
 
-  /* ========== 通用：A4 纸张盒（支持多页） ========== */
-  .container {
+  /* ========== 通用：A4 纸张盒（每页固定） ========== */
+  .page {
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
     padding: 1.4cm 1.2cm;
     background: var(--paper);
     margin: 0 auto;
@@ -45,23 +45,28 @@
     overflow: visible;
   }
 
-  /* ========== 屏幕：外装饰 ========== */
+  /* ========== 屏幕：外装饰 + 多页间距 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
-    .container {
+    .page {
       outline: 1.5px solid #555;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
     }
+    .page:last-child { margin-bottom: 0; }
   }
 
-  /* ========== 打印：移除外装饰，细粒度分页 ========== */
+  /* ========== 打印：移除外装饰，页间强制分页 ========== */
   @media print {
     html, body { background: #fff; padding: 0; margin: 0; }
-    .container {
+    .page {
       outline: none;
       box-shadow: none;
+      margin: 0;
+      break-after: page;
     }
+    .page:last-child { break-after: auto; }
     .section-title { break-after: avoid; }
     .item { break-inside: avoid; }
     .header { break-after: avoid; }
@@ -269,8 +274,9 @@
 </style>
 </head>
 <body>
-<div class="container">
 
+<!-- ========== 第 1 页 ========== -->
+<div class="page">
   <!-- ========== 头部 ========== -->
   <header class="header">
     <div class="header-left">
@@ -325,7 +331,10 @@
       </div>
     </div>
   </section>
+</div>
 
+<!-- ========== 第 2 页 ========== -->
+<div class="page">
   <!-- ========== 项目经验 ========== -->
   <section class="section">
     <div class="section-title">
