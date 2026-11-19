@@ -48,8 +48,9 @@
     border-radius: 18px;
     margin: 16px;
     padding: 1.5cm 1.2cm;
-    min-height: calc(297mm - 32px);
+    height: calc(297mm - 32px);
     box-sizing: border-box;
+    overflow: visible;
   }
 
   /* ========== 屏幕：外装饰 ========== */
@@ -61,7 +62,7 @@
     }
   }
 
-  /* ========== 打印：移除外装饰和装饰元素，细粒度分页 ========== */
+  /* ========== 打印：移除装饰元素 ========== */
   @media print {
     html, body { background: #fff; padding: 0; margin: 0; }
     .container {
@@ -72,7 +73,7 @@
       background: #fff;
       border-radius: 0;
       margin: 0;
-      padding: 1.5cm 1.2cm;
+      height: 297mm;
     }
     .section-title { break-after: avoid; }
     .item { break-inside: avoid; }
@@ -161,7 +162,7 @@
   }
 
   /* ========== 章节 ========== */
-  .section { margin-top: 12px; page-break-inside: avoid; }
+  .section { margin-top: 12px; }
   .section-title {
     display: flex;
     align-items: center;
