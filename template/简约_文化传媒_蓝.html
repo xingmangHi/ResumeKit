@@ -34,10 +34,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ========== 通用：外层固定盒 ========== */
+  /* ========== 通用：固定 A4 外盒 ========== */
   .container {
     width: 210mm;
     height: 297mm;
+    padding: 16px;
     margin: 0 auto;
     box-sizing: border-box;
     overflow: visible;
@@ -59,7 +60,6 @@
     .container {
       background: #dbeafe;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      padding: 16px;
     }
     .paper {
       background: var(--paper);
@@ -73,7 +73,6 @@
     .container {
       background: #fff;
       box-shadow: none;
-      padding: 0;
     }
     .paper {
       background: #fff;
