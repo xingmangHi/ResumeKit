@@ -15,7 +15,7 @@
   }
 
   /* ========== 打印：A4，支持多页溢出 ========== */
-  @page { size: A4 portrait; margin: 1.5cm 1.2cm; }
+  @page { size: A4; margin: 1.5cm 1.2cm; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -30,37 +30,28 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ========== 通用：固定 A4 纸张盒（屏幕和打印共享） ========== */
-  .container {
-    width: 210mm;
-    height: 297mm;
-    padding: 1.5cm 1.2cm;
-    background: var(--paper);
-    margin: 0 auto;
-    box-sizing: border-box;
-    overflow: visible;
-  }
-
-  /* ========== 屏幕：外装饰 ========== */
+  /* ========== 屏幕：模拟 A4 纸张，21cm × 29.7cm，带物理边线 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
     .container {
-      border: 1.5px solid #555;
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1.5cm 1.2cm;         /* 与 @page margin 一致 */
+      background: var(--paper);
+      border: 1.5px solid #555;     /* A4 物理边界线 */
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
     }
   }
 
-  /* ========== 打印：移除外装饰，细粒度分页 ========== */
+  /* ========== 打印：使用 @page，无边线 ========== */
   @media print {
-    html, body { background: #fff; padding: 0; margin: 0; }
-    .container {
-      border: none;
-      box-shadow: none;
-    }
-    .section-title { break-after: avoid; }
-    .item { break-inside: avoid; }
+    body { font-size: 14.5px; background: #fff; padding: 0; }
+    .section { page-break-inside: avoid; }
   }
+
+  .container { max-width: 21cm; margin: 0 auto; }
 
   /* ========== 头部 ========== */
   .header { text-align: center; padding: 6px 0 18px; }
@@ -75,7 +66,7 @@
   .contact > span:not(:last-child)::after { content: " | "; margin: 0 12px; }
 
   /* ========== 章节 ========== */
-  .section { margin-top: 12px; }
+  .section { margin-top: 12px; page-break-inside: avoid; }
   .section-title {
     font-size: 17px;
     font-weight: 700;

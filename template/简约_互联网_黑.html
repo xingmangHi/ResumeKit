@@ -18,7 +18,7 @@
   }
 
   /* ========== 打印：A4 ========== */
-  @page { size: A4 portrait; margin: 1.4cm 1.2cm; }
+  @page { size: A4; margin: 1.4cm 1.2cm; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,38 +34,29 @@
     font-feature-settings: "tnum" 1;
   }
 
-  /* ========== 通用：固定 A4 纸张盒（屏幕和打印共享） ========== */
-  .container {
-    width: 210mm;
-    height: 297mm;  /* 固定高度，不是 min-height */
-    padding: 1.4cm 1.2cm;
-    background: var(--paper);
-    margin: 0 auto;
-    box-sizing: border-box;
-    overflow: visible;  /* 显式检测溢出 */
-  }
-
-  /* ========== 屏幕：外装饰 ========== */
+  /* ========== 屏幕：A4 模拟 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
     .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1.4cm 1.2cm;
+      background: var(--paper);
       border: 1.5px solid #555;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
     }
   }
 
-  /* ========== 打印：移除外装饰，细粒度分页 ========== */
+  /* ========== 打印微调 ========== */
   @media print {
-    html, body { background: #fff; padding: 0; margin: 0; }
-    .container {
-      border: none;
-      box-shadow: none;
-    }
-    .section-title { break-after: avoid; }
-    .item { break-inside: avoid; }
-    .project-card { break-inside: avoid; }
+    body { font-size: 13.5px; background: #fff; padding: 0; }
+    .section { page-break-inside: avoid; }
+    .project-card { page-break-inside: avoid; }
   }
+
+  .container { max-width: 21cm; margin: 0 auto; }
 
   /* ========== 头部：左大姓名+职位,右联系方式键值对 ========== */
   .header {
@@ -112,7 +103,7 @@
   .contact-row .v { font-weight: 500; color: var(--text); }
 
   /* ========== 章节标题:左侧黑竖条 ========== */
-  .section { margin-top: 14px; }
+  .section { margin-top: 14px; page-break-inside: avoid; }
   .section-title {
     display: flex;
     align-items: center;
