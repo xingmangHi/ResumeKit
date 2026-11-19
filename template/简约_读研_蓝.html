@@ -18,7 +18,7 @@
   }
 
   /* ========== 打印：A4（紧凑边距，强制 1 页） ========== */
-  @page { size: A4; margin: 0.6cm 0.7cm; }
+  @page { size: A4 portrait; margin: 0.6cm 0.7cm; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -51,13 +51,20 @@
 
   /* ========== 打印微调 ========== */
   @media print {
-    body { font-size: 13px; line-height: 1.75; background: #fff; padding: 0; margin: 0; }
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .container {
+      border: none;
+      box-shadow: none;
+    }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+  }
     .container { padding: 0; border: none; box-shadow: none; max-width: none; width: 100%; }
-    .section { page-break-inside: avoid; }
+    .section { }
     .item { page-break-inside: avoid; }
   }
 
-  .container { max-width: 21cm; margin: 0 auto; }
+  
 
   /* ========== 头部 ========== */
   .header {
@@ -167,7 +174,15 @@
     border-bottom: 1px solid var(--divider);
   }
   .item-desc a:hover { border-bottom-color: var(--primary); }
-  @media print { .item-desc a { color: var(--text); border-bottom: 1px solid var(--divider); } }
+  @media print {
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .container {
+      border: none;
+      box-shadow: none;
+    }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+  } }
 
   .bul {
     list-style: none;

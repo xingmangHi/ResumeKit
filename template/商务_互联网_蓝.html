@@ -16,7 +16,7 @@
   }
 
   /* ========== 打印：A4，margin 置 0 让 banner 顶到纸张顶端 ========== */
-  @page { size: A4; margin: 0; }
+  @page { size: A4 portrait; margin: 0; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -48,7 +48,14 @@
 
   /* ========== 打印：使用 @page，无边线；body 14.5px（RULES.md §1.8 推荐） ========== */
   @media print {
-    body { font-size: 14.5px; background: #fff; padding: 0; }
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .container {
+      border: none;
+      box-shadow: none;
+    }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+  }
     .banner-name         { font-size: 16px; }
     .banner-meta         { font-size: 16px; }
     .banner-deco .zh     { font-size: 24px; }
@@ -60,10 +67,10 @@
     .item-desc           { font-size: 13.5px; }
     .skills-grid         { font-size: 13.5px; }
     .self-eval           { font-size: 13.5px; }
-    .section             { page-break-inside: avoid; }
+    .section             { }
   }
 
-  .container { max-width: 21cm; margin: 0 auto; }
+  
 
   /* ========== 头部 Banner（深蓝通栏） ========== */
   .banner {
@@ -160,8 +167,7 @@
   .section {
     margin-top: 18px;
     padding: 0 28px;
-    page-break-inside: avoid;
-  }
+    }
   .section-title {
     display: flex;
     align-items: center;

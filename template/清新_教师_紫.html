@@ -20,7 +20,7 @@
   }
 
   /* ========== 打印：A4，支持多页溢出 ========== */
-  @page { size: A4; margin: 1.5cm 1.2cm; }
+  @page { size: A4 portrait; margin: 1.5cm 1.2cm; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -50,11 +50,18 @@
   }
 
   @media print {
-    body { font-size: 14.5px; background: #fff; padding: 0; }
-    .section { page-break-inside: avoid; }
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .container {
+      border: none;
+      box-shadow: none;
+    }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+  }
+    .section { }
   }
 
-  .container { max-width: 21cm; margin: 0 auto; }
+  
 
   /* ========== 主体两栏布局：左 sidebar（容器化）+ 右 content ========== */
   .body {
@@ -189,7 +196,7 @@
   }
 
   /* ========== Main 章节标题：浅紫底 + 内侧装饰块 ========== */
-  .content .section { margin-bottom: 28px; page-break-inside: avoid; }   /* 章节间距继续加大 */
+  .content .section { margin-bottom: 28px; }   /* 章节间距继续加大 */
   .content h2 {
     display: flex;
     align-items: center;
