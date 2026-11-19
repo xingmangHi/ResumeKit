@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<title>简约_教育_蓝 · 简历模板</title>
+<style>
+  /* ========== 主题色（蓝） ========== */
+  :root {
+    --primary:       #7a95d3;
+    --primary-dark:  #5d75b0;
+    --primary-soft:  #eaeef7;
+    --ink:           #000000;
+    --text:          #111827;
+    --muted:         #6b7280;
+    --divider:       #dbeafe;
+    --tag-bg:        #f3f4f6;
+    --bg:            #ffffff;
+    --paper:         #ffffff;
+  }
+
+  /* ========== 打印：A4（紧凑边距，强制 1 页） ========== */
+  @page { size: A4; margin: 0.6cm 0.7cm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 13px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* ========== 屏幕：A4 模拟 ========== */
+  @media screen {
+    html { background: #888; }
+    body { background: #888; padding: 20px; }
+    .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 0.75cm 0.8cm;
+      background: var(--paper);
+      border: 1.5px solid #555;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+  }
+
+  /* ========== 打印微调 ========== */
+  @media print {
+    body { font-size: 13px; line-height: 1.75; background: #fff; padding: 0; margin: 0; }
+    .container { padding: 0; border: none; box-shadow: none; max-width: none; width: 100%; }
+    .section { page-break-inside: avoid; }
+    .item { page-break-inside: avoid; }
+  }
+
+  .container { max-width: 21cm; margin: 0 auto; }
+
+  /* ========== 头部 ========== */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 110px;
+    gap: 16px;
+    align-items: start;
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .header-left .name {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    row-gap: 2px;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .contact-grid .k { color: var(--text); margin-right: 4px; }
+  .header-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 110px;
+    height: 140px;
+    background: var(--primary);
+  }
+
+  /* ========== 章节标题（蓝色填充胶囊 + 下方细线） ========== */
+  .section { margin-top: 8px; }
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+  .section-title .pill {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--primary);
+    color: #ffffff;
+    padding: 4px 10px 3px;
+    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .section-title .rule {
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    margin-top: 4px;
+  }
+
+  /* ========== 章节修饰符（学科竞赛） ========== */
+  .section--competition .row-3 .c1,
+  .section--competition .row-3 .c2,
+  .section--competition .row-3 .c3 {
+    color: #000;
+    font-weight: 400;
+  }
+
+  /* ========== 条目头（左：项目名 ｜ 中：身份居中 ｜ 右：日期） ========== */
+  .item { margin-top: 5px; }
+  .item-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: 14px;
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .item-head .name { color: var(--primary); }
+  .item-head .role { color: var(--primary); white-space: nowrap; }
+  .item-head .date { color: var(--primary); white-space: nowrap; font-weight: 600; }
+
+  /* ========== 描述段 / Bullet ========== */
+  .item-desc { padding: 3px 0 0; }
+  .item-desc p { font-size: 12.5px; line-height: 1.85; margin-top: 1px; }
+  .item-desc p:first-child { margin-top: 0; }
+  .item-desc strong { font-weight: 700; color: var(--text); }
+  .item-desc em { font-style: normal; color: var(--text); }
+  .item-desc code {
+    background: var(--tag-bg);
+    padding: 0 4px;
+    border-radius: 2px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+  .item-desc a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--divider);
+  }
+  .item-desc a:hover { border-bottom-color: var(--primary); }
+  @media print { .item-desc a { color: var(--text); border-bottom: 1px solid var(--divider); } }
+
+  .bul {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+  }
+  .bul li {
+    padding-left: 14px;
+    text-indent: -14px;
+    font-size: 12.5px;
+    line-height: 1.85;
+    margin-top: 1px;
+  }
+  .bul li::before {
+    content: "➤";
+    color: var(--primary);
+    font-size: 0.85em;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+  .bul li strong { font-weight: 700; color: var(--text); }
+
+  /* ========== 三列条目（学科竞赛） ========== */
+  .row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    column-gap: 14px;
+    font-size: 12.5px;
+    padding: 3px 0;
+    border-bottom: none;
+  }
+  .row-3 .c1 { color: var(--primary); font-weight: 700; }
+  .row-3 .c2 { color: var(--primary); font-weight: 700; }
+  .row-3 .c3 { color: var(--primary); font-weight: 600; white-space: nowrap; }
+  .row-3 + .row-3 { margin-top: 0; }
+
+  blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 8px;
+    margin: 2px 0;
+    color: var(--text);
+  }
+
+  strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ============ 头部 ============ -->
+  <header class="header">
+    <div class="header-left" style="transform: translate(2px, 19px);">
+      <h1 class="name">姓　　名</h1>
+      <div class="contact-grid">
+        <div><span class="k">籍　贯：</span>XX 省 XXX 市</div>
+        <div><span class="k">电　话：</span>XX（微信同号）</div>
+        <div><span class="k">政治面貌：</span>XXXX</div>
+        <div><span class="k">邮　箱：</span>XX@163.com</div>
+      </div>
+    </div>
+    <div class="header-right" aria-label="照片位"></div>
+  </header>
+
+  <!-- ============ 教育背景 ============ -->
+  <section class="section">
+    <h2 class="section-title"><span class="pill">教育背景</span><span class="rule"></span></h2>
+    <div class="item">
+      <div class="item-head">
+        <span class="name">XX 大学（人民兵工第一校）</span>
+        <span class="role">XX 专业</span>
+        <span class="date">2022.09 - 2026.07</span>
+      </div>
+      <div class="item-desc">
+        <ul class="bul">
+          <li><strong>学习成绩：</strong>4.02/5.0  <strong>专业排名：</strong>1/41（连续三年）</li>
+          <li><strong>综合绩点：</strong>4.23/5.5  <strong>综合排名：</strong>1/41（连续三年）</li>
+          <li><strong>核心课程：</strong>化学电源测试技术(98 分)、氢能与应用(97 分)、物理化学(95 分)、新能源器件组装技术与设备(94 分)、储能技术与应用(92 分)、材料研究与测试方法(91 分)、电化学原理(89 分) <strong>（90 分以上课程 46 门，占比 67%）</strong></li>
+          <li><strong>英语水平：</strong>CET-6（427 分）  CET-4（557 分）</li>
+          <li><strong>荣誉奖项：</strong>XXX 奖学金（全校前 2%）、综测特等奖学金（专业唯一）、"XXX" 单项奖学金（全校前 1%）</li>
+          <li><strong>基本技能：</strong>Solidworks 及 AutoCAD 建模、ANSYS 有限元分析、Origin 绘图、EndNote 文献整理、Python 编程等</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 科研经历 ============ -->
+  <section class="section section--research">
+    <h2 class="section-title"><span class="pill">科研经历</span><span class="rule"></span></h2>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="name">科研项目——（XX）</span>
+        <span class="role">核心成员</span>
+        <span class="date">2023.05-至今</span>
+      </div>
+      <div class="item-desc">
+        <ul class="bul">
+          <li><strong>项目内容：</strong>高铁硫酸镁盐水泥与煅烧烟气脱硫石膏协同制备胶凝速凝土，提出了一种高效资源化利用 XXX 石膏的新路径</li>
+          <li><strong>主要工作：</strong>负责 XX 材料配比优化，参与胶凝速凝土性能调控，在粒度与抗压强度均值调控目标的基础上多消除 XX% 湿度；对比 XXX 板材，<strong>降低胶量降低 XX%</strong>，后期进行 Origin 绘图；在学科竞赛中，负责答辩以及项目论文撰写</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="name">科研项目——（XX）</span>
+        <span class="role">负责人</span>
+        <span class="date">2024.04-2025.04</span>
+      </div>
+      <div class="item-desc">
+        <ul class="bul">
+          <li><strong>核心工作：</strong>XX 大学与 XX 学院联合项目，引入大语言模型 XX 进行自动问答测试，覆盖 XX 学院教师常见问题，生成 XXX 条测试对话，筛选出 XXXXXX 在 XX 支持类问题中的典型范本，为 XXXXX 模型优化提供依据</li>
+          <li><strong>项目成果：</strong>团队合作开发 XXX 模型，XXX 大学学生创新大赛（2024）XX 级 XX 奖</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="name">高水平学科竞赛——（XX）</span>
+        <span class="role">机械负责人</span>
+        <span class="date">2024.02-2024.10</span>
+      </div>
+      <div class="item-desc">
+        <ul class="bul">
+          <li><strong>核心工作：</strong>本人自学交叉学科知识，精进 C++ 等编程语言，<strong>调试优化系统行走结构避障模块</strong>，掌握 XXXXXX 相关技术，并使用 Solidworks 进行整体建模、ANSYS 进行零件强度、刚度仿真，利用 3D 打印技术制样制造等</li>
+          <li><strong>项目成果：</strong>团队合作搭建实物 XXXX 系统，并参加第十七届全国三维数字化设计创新大赛，<strong>获省赛一等奖</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <span class="name">科研项目——（XX）</span>
+        <span class="role">负责人</span>
+        <span class="date">2024.04-2025.04</span>
+      </div>
+      <div class="item-desc">
+        <ul class="bul">
+          <li><strong>核心工作：</strong>整理总结 10+ 篇光催化领域文献，协助设计对比实验方案，制备 Pd-Ni/g-C<sub>3</sub>N<sub>4</sub> 催化剂，利用电化学工作站对其进行充电电流、阻抗、MS 表征，处理数据后利用 Origin 绘图，<strong>撰写结题实验报告</strong></li>
+          <li><strong>项目成果：</strong>完成结题综述一篇，获得大学生创新创业训练计划院级立项</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 学科竞赛 ============ -->
+  <section class="section section--competition">
+    <h2 class="section-title"><span class="pill">学科竞赛</span><span class="rule"></span></h2>
+    <div class="row-3">
+      <span class="c1">中国国际大学生创新大赛（2024）</span>
+      <span class="c2">国家三等奖（山西省前 XX%）</span>
+      <span class="c3">2024.10</span>
+    </div>
+    <div class="row-3">
+      <span class="c1">第十七届全国三维数字化创新设计大赛</span>
+      <span class="c2">省级一等奖（山西省前 XX%）</span>
+      <span class="c3">2024.11</span>
+    </div>
+    <div class="row-3">
+      <span class="c1">第十四届"挑战杯"山西省大学生创业计划竞赛</span>
+      <span class="c2">省级一等奖（山西省前 XX%）</span>
+      <span class="c3">2024.06</span>
+    </div>
+    <div class="row-3">
+      <span class="c1">第十届全国大学生节能减排社会实践与科技竞赛（负责人）</span>
+      <span class="c2">省级一等奖（山西省前 XX%）</span>
+      <span class="c3">2024.05</span>
+    </div>
+  </section>
+
+  <!-- ============ 综合实践 ============ -->
+  <section class="section">
+    <h2 class="section-title"><span class="pill">综合实践</span><span class="rule"></span></h2>
+    <div class="item-desc">
+      <ul class="bul">
+        <li><strong>学生工作：</strong>担任党支部组织委员以及班主助理，XXXXX 平台创始人，带领团队获院 "XXXX" 称号（前 1%）</li>
+        <li><strong>体育运动：</strong>爱好运动，累计跑量达 <strong>400 余公里</strong>，骑行 <strong>600 余公里</strong>，参与校运动会获 "XXXXXXXX"</li>
+        <li><strong>志愿服务：</strong>参与湖南省洒冬行动、火车站迎送等 XX 余次志愿活动，志愿时长 XXX 小时，获长沙市青志协 "优秀志愿者"</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+</body></html>

@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>商务_互联网_蓝简历模板</title>
+<style>
+  /* ========== 主题色（深商务蓝） ========== */
+  :root {
+    --primary:       #708cb4;
+    --primary-dark:  #708cb4;
+    --text:          #1a1a1a;
+    --muted:         #6b7280;
+    --divider:       #cbd5e0;
+    --bg:            #ffffff;
+    --paper:         #ffffff;
+  }
+
+  /* ========== 打印：A4，margin 置 0 让 banner 顶到纸张顶端 ========== */
+  @page { size: A4; margin: 0; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 屏幕：模拟 A4 纸张，21cm × 29.7cm，带物理边线 ========== */
+  @media screen {
+    html { background: #888; }
+    body { background: #888; padding: 20px; }
+    .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 0;
+      background: var(--paper);
+      border: 1.5px solid #555;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+  }
+
+  /* ========== 打印：使用 @page，无边线；body 14.5px（RULES.md §1.8 推荐） ========== */
+  @media print {
+    body { font-size: 14.5px; background: #fff; padding: 0; }
+    .banner-name         { font-size: 16px; }
+    .banner-meta         { font-size: 16px; }
+    .banner-deco .zh     { font-size: 24px; }
+    .banner-deco .en     { font-size: 14px; }
+    .banner-intent       { font-size: 14px; }
+    .basics              { font-size: 13px; }
+    .title-tag           { font-size: 16px; }
+    .item-head           { font-size: 14.5px; }
+    .item-desc           { font-size: 13.5px; }
+    .skills-grid         { font-size: 13.5px; }
+    .self-eval           { font-size: 13.5px; }
+    .section             { page-break-inside: avoid; }
+  }
+
+  .container { max-width: 21cm; margin: 0 auto; }
+
+  /* ========== 头部 Banner（深蓝通栏） ========== */
+  .banner {
+    position: relative;     /* 让 .photo-frame 可以 absolute 相对 banner 定位 */
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 28px;
+    display: grid;
+    grid-template-columns: 150px 1fr 200px;
+    gap: 18px;
+    align-items: center;
+    min-height: 4.5cm;      /* 加高；照片 150px 仍在 banner 内，约 20px 探到白区（约 1/8） */
+    overflow: visible;      /* 允许照片底部伸入下方白区 */
+  }
+  .photo-frame {
+    position: absolute;     /* 脱流，top:0 紧贴蓝顶；7/8 在蓝，1/8 伸到白区 */
+    top: 0;
+    left: 28px;             /* 与 banner 左 padding 对齐 */
+    width: 120px;
+    height: 150px;          /* 8/7 × 131.6（banner 内容撑高后的高度）≈ 150，确保 1/8 = 18.4px 精确伸出 */
+    border: 3px solid #708cb4;
+    background: rgba(255,255,255,0.12);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+    letter-spacing: 2px;
+    z-index: 2;             /* 盖在 grid 文字之上，视觉更稳 */
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* 照片 absolute 脱流后，grid 只剩 2 个 item；显式把它们放到第 2、3 列，避免文字被挤到第 1 列被照片遮住 */
+  .banner-info { grid-column: 2; }
+  .banner-deco  { grid-column: 3; }
+  /* 姓名 + 性别年龄 一行排布（flex 居中），字号统一 */
+  .banner-name-row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .banner-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    line-height: 1.1;
+  }
+  .banner-meta {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+  }
+  .banner-intent {
+    font-size: 18px;     /* 加大（原 15px），让"求职意向"更突出 */
+    margin-top: 10px;
+  }
+  .banner-intent .prefix { font-weight: 700; }
+  .banner-deco {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .banner-deco .zh {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    line-height: 1.1;
+  }
+  .banner-deco .en {
+    font-size: 16px;          /* 加大（原 12px），与 .banner-intent 同级 */
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.85);
+    margin-top: 6px;
+  }
+
+  /* ========== 基础信息块（banner 下方，2 列 6 项） ========== */
+  .basics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 28px;
+    padding: 12px 28px 8px;
+    font-size: 14px;
+    margin-top: 16px;   /* 与照片底边（banner 底 + 15.8px）对齐，让下方信息视觉上跟着照片下移 */
+  }
+  .basics .prefix { font-weight: 600; }
+
+  /* ========== 章节 ========== */
+  .section {
+    margin-top: 18px;
+    padding: 0 28px;
+    page-break-inside: avoid;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .title-tag {
+    background: var(--primary);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 8px 14px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+  .title-tag::after {
+    content: "";
+    position: absolute;
+    right: -12px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 12px solid var(--primary);
+  }
+  .title-line {
+    flex: 1;
+    height: 40px;            /* 与 .title-tag 等高，形成贯通横向条 */
+    background: #ededed;
+    /* 左缘挖一个右指三角缺口（12px 宽），与 .title-tag 的三角之间留 4px 间隔 */
+    clip-path: polygon(4px 0, 100% 0, 100% 100%, 4px 100%, 16px 50%);
+  }
+
+  /* ========== 条目（entry）：日期 | 主体 | 补充 — 三段式 ========== */
+  .item { margin-top: 8px; }
+  .item-head {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: baseline;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .item-date  { text-align: left;   white-space: nowrap; }
+  .item-title { text-align: center; }
+  .item-org   { text-align: right;  white-space: nowrap; }
+  .item-desc {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .item-desc .prefix { font-weight: 600; }
+
+  /* ========== 技能证书：2 列网格 + ● 起头 ========== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 32px;
+    font-size: 14px;
+  }
+  .skills-grid > div {
+    padding-left: 18px;
+    text-indent: -18px;
+  }
+  .skills-grid > div::before {
+    content: "●";
+    margin-right: 8px;
+    font-size: 0.9em;
+  }
+
+  /* ========== 自我评价：单段连续文本 ========== */
+  .self-eval {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 头部 Banner ========== -->
+  <header class="banner">
+    <div class="photo-frame" style="margin-left: 1px; margin-top: 36px;">
+      <!-- 在此放置 4:5 长方形照片：取消下一行注释并替换 src -->
+      <!-- <img src="your-photo.jpg" alt="照片"> -->
+    </div>
+    <div class="banner-info">
+      <div class="banner-name-row" style="margin-top: 36px;">
+        <div class="banner-name" style="margin-left: -149px; margin-top: -13px;">姓&nbsp;&nbsp;名</div>
+        <div class="banner-meta" style="margin-left: 12px;">男&nbsp;XX 岁&nbsp;民族</div>
+      </div>
+      <div class="banner-intent" style="margin-top: 4px;"><span class="prefix">求职意向</span>：意向岗位</div>
+    </div>
+    <div class="banner-deco" style="margin-left: 8px; margin-top: 48px;">
+      <div class="zh">个人简历</div>
+      <div class="en">PERSONAL RESUME</div>
+    </div>
+  </header>
+
+  <!-- ========== 基础信息块 ========== -->
+  <div class="basics">
+    <div><span class="prefix">最高学历</span>：学历</div>
+    <div><span class="prefix">电话</span>：138 0000 0000</div>
+    <div><span class="prefix">工作年限</span>：X 年</div>
+    <div><span class="prefix">邮箱</span>：name@example.com</div>
+    <div><span class="prefix">期望薪资</span>：XX-XXk</div>
+    <div><span class="prefix">地址</span>：xx 省 xx 市</div>
+  </div>
+
+  <!-- ========== 教育背景 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="title-tag">教育背景</span>
+      <span class="title-line"></span>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+        <span class="item-title">某某大学</span>
+        <span class="item-org">计算机科学与技术</span>
+      </div>
+      <div class="item-desc"><span class="prefix">主修课程</span>：数据结构与算法、操作系统、计算机网络、数据库系统原理、软件工程、人工智能基础、编译原理、面向对象编程、Web开发技术、云计算与大数据分析。</div>
+    </div>
+  </section>
+
+  <!-- ========== 工作经验 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="title-tag">工作经验</span>
+      <span class="title-line"></span>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+        <span class="item-title">某某公司</span>
+        <span class="item-org">技术主管</span>
+      </div>
+      <div class="item-desc">管理开发团队，指导新人，并负责核心模块的设计与开发。协调项目进度，确保按时交付高质量的软件产品。推动技术创新，提高团队整体研发效率。</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+        <span class="item-title">某某公司</span>
+        <span class="item-org">高级软件工程师</span>
+      </div>
+      <div class="item-desc">负责大型项目的系统架构设计与实现。带领团队开发高效、安全的后台系统，优化代码结构，提高系统性能。参与公司技术难题攻关，并成功上线多个重要项目。</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-date">20XX.XX -- 20XX.XX</span>
+        <span class="item-title">某某公司</span>
+        <span class="item-org">软件开发工程师</span>
+      </div>
+      <div class="item-desc">负责公司内部管理系统的开发与维护。优化数据库结构、编写代码、调试程序。与前端团队合作完成多个项目，实现系统功能的优化与升级。</div>
+    </div>
+  </section>
+
+  <!-- ========== 技能证书 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="title-tag">技能证书</span>
+      <span class="title-line"></span>
+    </div>
+    <div class="skills-grid">
+      <div>大学英语四级证书</div>
+      <div>全国计算机二级证书</div>
+      <div>普通话一级甲等</div>
+      <div>Oracle Certified Professional (OCP)</div>
+    </div>
+  </section>
+
+  <!-- ========== 自我评价 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="title-tag">自我评价</span>
+      <span class="title-line"></span>
+    </div>
+    <div class="self-eval">我是一名经验丰富且有激情的程序员。通过多年的工作和项目经验，我积累了扎实的编程技能和项目管理能力。熟悉多种编程语言和开发工具，擅长解决复杂的技术问题。我注重细节，追求代码的高效与稳定。希望能够在贵公司发挥我的专业优势，为公司发展贡献自己的力量。</div>
+  </section>
+
+</div>
+
+
+</body>
+</html>

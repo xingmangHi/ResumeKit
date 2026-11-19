@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>简约_制造业_紫简历模板</title>
+<style>
+  /* ========== 主题色（中紫 #7c3aed） ========== */
+  :root {
+    --primary:        #7c3aed;          /* 主紫：横线、符号、标签描边 */
+    --primary-dark:   #6d28d9;          /* 深紫：标题字 */
+    --primary-soft:   #ede9fe;          /* 浅紫 */
+    --primary-bg:     #f5f3ff;          /* 极浅紫 */
+    --gray-bg:        #f3f4f6;          /* tag 灰色底 */
+    --gray-text:      #6b7280;          /* tag 灰色字 */
+    --text:           #1f2937;
+    --muted:          #6b7280;
+    --divider:        #e5e7eb;
+    --bg:             #ffffff;
+    --paper:          #ffffff;
+  }
+
+  /* ========== 打印：A4 ========== */
+  @page { size: A4; margin: 1.5cm 1.2cm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 屏幕 A4 模拟 ========== */
+  @media screen {
+    html { background: #888; }
+    body { background: #888; padding: 20px; }
+    .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1.5cm 1.2cm;
+      background: var(--paper);
+      border: 1.5px solid #555;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+  }
+
+  @media print {
+    body { font-size: 14.5px; background: #fff; padding: 0; }
+    .section { page-break-inside: avoid; }
+  }
+
+  .container { max-width: 21cm; margin: 0 auto; }
+
+  /* ========== 通用 inline 图标容器（14×14，跟随父元素 color） ========== */
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin-right: 5px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .icon svg { display: block; width: 100%; height: 100%; }
+
+  /* ========== 头部：居中 + 联系行 ========== */
+  .header {
+    text-align: center;
+    padding: 4px 0 12px;
+  }
+  .header .name {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+  .header .contact {
+    font-size: 14.5px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+  .header .contact .row > span {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .header .contact .row > span:not(:last-child)::after {
+    content: " | ";
+    margin: 0 4px;
+    color: var(--muted);
+  }
+  .header .contact .row.links span {
+    color: var(--primary);
+  }
+  .header .contact .row.links .icon { color: var(--primary); }
+
+  /* ========== 章节：紫色文字 + 加粗紫色横线（2px） ========== */
+  .section {
+    margin-top: 18px;
+    page-break-inside: avoid;
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary);   /* 加粗：1 → 2px */
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ========== 条目头：三段式（左｜中｜右） ========== */
+  .item { margin-top: 8px; }
+  .item-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 14px;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  /* item-title / item-mid 改 inline-flex，强制两段文字按 baseline 对齐（985/双一流 这些 tag 不再下沉） */
+  .item-title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .item-mid {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .item-date {
+    text-align: right;
+    white-space: nowrap;
+    color: var(--muted);
+    font-weight: 500;
+    /* item-date 跟兄弟 item 同样使用 baseline，视觉上三段对齐 */
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  /* ========== 公司官方 logo 容器（22×22，溢出隐藏） ========== */
+  .item-head .co-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+    vertical-align: -5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .item-head .co-logo svg { display: block; width: 100%; height: 100%; }
+
+  /* ========== tag 风格尾注（985 211 / 双一流）— 灰色背景，由父 flex 接管 baseline 对齐 ========== */
+  .item-head .tag-soft {
+    display: inline-block;
+    background: var(--gray-bg);
+    color: var(--gray-text);
+    font-weight: 500;
+    font-size: 11.5px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+  }
+
+  /* ========== 子项列表：紫色 ● + 字段加粗 ========== */
+  .item-list { margin-top: 4px; padding-left: 2px; }
+  .item-list > div {
+    padding-left: 18px;
+    text-indent: -18px;
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 2px;
+  }
+  .item-list > div::before {
+    content: "●";
+    color: var(--primary);
+    font-size: 0.7em;
+    margin-right: 8px;
+    vertical-align: 2px;
+  }
+  /* 行级开关：去掉圆点 + 直接左对齐（GPA / 主修课程 / 负责业务 等） */
+  .item-list > div.no-bullet {
+    padding-left: 0;
+    text-indent: 0;
+  }
+  .item-list > div.no-bullet::before {
+    display: none;
+  }
+
+  /* 二级 ○ 子项（项目经验的"行动"内） */
+  .sub-list {
+    margin: 2px 0 4px 18px;
+    padding-left: 2px;
+  }
+  .sub-list > div {
+    padding-left: 14px;
+    text-indent: -14px;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 1px;
+  }
+  .sub-list > div::before {
+    content: "○";
+    color: var(--primary);
+    font-size: 0.85em;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+
+  /* ========== 字段加粗 ========== */
+  .prefix { font-weight: 700; }
+
+  /* ========== 技术栈标签（紫色描边胶囊） ========== */
+  .tech-stack {
+    margin: 6px 0 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    padding-left: 2px;
+  }
+  .tech-stack .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid var(--primary);
+    color: var(--primary-dark);
+    border-radius: 12px;
+    font-size: 12.5px;
+    background: #fff;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 头部：居中姓名 + 联系行（手机/信封/定位 + GitHub/掘金） ========== -->
+  <header class="header">
+    <div class="name">姓&nbsp;&nbsp;名</div>
+    <div class="contact">
+      <div class="row">
+        <span>男 / 2000.05.15</span>
+        <span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="2" width="12" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </span>
+          138 0000 0000
+        </span>
+        <span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </span>
+          name@example.com
+        </span>
+        <span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </span>
+          南京市鼓楼区
+        </span>
+      </div>
+      <div class="row links">
+        <span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </span>
+          github.com/xxx
+        </span>
+        <span>
+          <span class="icon">
+            <svg viewBox="0 0 24 24">
+              <rect width="24" height="24" rx="4" fill="#1e80ff"/>
+              <path d="M9 6h2v8.5c0 1.4 1.1 2.5 2.5 2.5s2.5-1.1 2.5-2.5V13h-2v-1.5h4V14c0 2.2-1.8 4-4 4s-4-1.8-4-4V6z" fill="#fff"/>
+            </svg>
+          </span>
+          juejin.cn/user/xxx
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== 教育背景 ========== -->
+  <section class="section">
+    <div class="section-title">教育背景</div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">南京大学<span class="tag-soft">985&nbsp;&nbsp;211</span></span>
+        <span class="item-mid">人工智能 - 本科<span class="tag-soft">双一流</span></span>
+        <span class="item-date">2020.09 -- 2024.07</span>
+      </div>
+      <div class="item-list">
+        <div class="no-bullet"><span class="prefix">GPA</span>：3.8/4.0</div>
+        <div class="no-bullet"><span class="prefix">主修课程</span>：机器学习、深度学习、自然语言处理、计算机视觉、强化学习、数据挖掘、算法设计与分析、Python 编程、数据结构</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 实习经历 ========== -->
+  <section class="section">
+    <div class="section-title">实习经历</div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">
+          <span class="co-logo">
+            <svg viewBox="0 0 24 24">
+              <rect width="24" height="24" rx="4" fill="#ff6a00"/>
+              <path d="M12 5 L 18 19 L 15 19 L 14 16.5 L 10 16.5 L 9 19 L 6 19 Z M 10.8 14 L 13.2 14 L 12 10.5 Z" fill="#fff"/>
+            </svg>
+          </span>
+          阿里巴巴
+        </span>
+        <span class="item-mid">AI 应用开发实习生</span>
+        <span class="item-date">2023.06 -- 2023.09</span>
+      </div>
+      <div class="item-list">
+        <div class="no-bullet"><span class="prefix">负责业务</span>：智能客服系统开发与优化</div>
+        <div><span class="prefix">背景</span>：电商平台日咨询量超过 500 万次，人工客服成本高，响应时间长，需要 AI 客服提升服务效率和用户体验</div>
+        <div><span class="prefix">职责</span>：参与智能客服系统开发，负责对话模型优化、意图识别、知识图谱构建等核心模块</div>
+        <div><span class="prefix">工作内容</span>：基于 Transformer 架构优化对话生成模型，使用 BERT 进行意图识别，准确率达到 92%；构建电商领域知识图谱，包含商品、订单、物流等 10 万+ 实体和 50 万+ 关系；开发多轮对话管理系统，支持上下文理解和上下文记忆，对话成功率提升 25%；使用 PyTorch 和 TensorFlow 训练和部署模型，通过 ONNX 实现模型量化，推理速度提升 3 倍；集成 RAG（检索增强生成）技术，结合向量数据库 Milvus，提升回答准确性 30%；建立 A/B 测试框架，对比不同模型效果，持续优化模型性能；使用 Docker 和 Kubernetes 进行模型部署和运维，支持 10 万+ 并发请求</div>
+        <div><span class="prefix">产出成果</span>：AI 客服日均处理咨询量 200 万+，人工客服咨询量降低 40%，用户满意度提升 15%，获得部门优秀实习生称号</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">
+          <span class="co-logo">
+            <svg viewBox="0 0 24 24">
+              <rect width="24" height="24" rx="4" fill="#0052d9"/>
+              <path d="M6 6 L 18 6 L 18 9 L 13.5 9 L 13.5 19 L 10.5 19 L 10.5 9 L 6 9 Z" fill="#fff"/>
+            </svg>
+          </span>
+          腾讯
+        </span>
+        <span class="item-mid">机器学习算法实习生</span>
+        <span class="item-date">2023.01 -- 2023.04</span>
+      </div>
+      <div class="item-list">
+        <div class="no-bullet"><span class="prefix">负责业务</span>：推荐系统算法优化</div>
+        <div><span class="prefix">背景</span>：短视频平台用户日活跃量超过 3 亿，需要提升推荐算法准确性和多样性，增强用户粘性</div>
+        <div><span class="prefix">职责</span>：参与推荐系统算法研发，负责特征工程、模型训练、效果评估等工作</div>
+        <div><span class="prefix">工作内容</span>：使用 Spark 和 Hadoop 处理 TB 级用户行为数据，提取用户画像、内容特征等 500+ 维度特征；基于 DeepFM 和 Wide&Deep 模型开发推荐算法，AUC 提升 5%；设计多目标优化策略，平衡点击率、停留时长、互动率等指标；使用 XGBoost 和 LightGBM 进行特征选择和模型融合，离线 AUC 达到 0.75；建立在线实验平台，进行 A/B 测试，实时监控指标变化；使用 Python 和 Scala 开发数据处理和模型训练流水线；优化模型推理性能，通过特征缓存和模型压缩，响应时间从 100ms 降至 50ms</div>
+        <div><span class="prefix">产出成果</span>：推荐算法 CTR 提升 8%，用户平均停留时长提升 12%，算法日服务请求 1 亿+ 次，获得团队认可</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 项目经验 ========== -->
+  <section class="section">
+    <div class="section-title">项目经验</div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">智能代码生成助手</span>
+        <span class="item-mid">项目负责人</span>
+        <span class="item-date">2022.09 -- 2023.06</span>
+      </div>
+      <div class="tech-stack">
+        <span class="tag">GPT</span>
+        <span class="tag">Transformer</span>
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Redis</span>
+      </div>
+      <div class="item-list">
+        <div><span class="prefix">背景</span>：软件开发中存在大量重复代码编写工作，影响开发效率，需要 AI 辅助代码生成工具提升生产力</div>
+        <div><span class="prefix">任务</span>：开发智能代码生成助手，支持多语言代码生成、代码补全、代码审查等功能</div>
+        <div><span class="prefix">行动</span>：</div>
+      </div>
+      <div class="sub-list">
+        <div>使用 CodeGPT 和 StarCoder 作为基础模型，针对 Python、Java、JavaScript 等语言进行微调</div>
+        <div>构建代码知识库，包含 10 万+ 高质量代码片段和 5 万+ API 文档</div>
+        <div>使用 LangChain 框架构建代码生成流程，支持上下文理解和多轮对话</div>
+        <div>开发 AST（抽象语法树）解析器，验证生成代码的语法正确性</div>
+        <div>使用 FastAPI 开发后端服务，支持 RESTful API 和 WebSocket 实时交互</div>
+        <div>集成 GitHub API，支持代码同步和版本管理</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

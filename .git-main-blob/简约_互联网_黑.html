@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>简约_互联网_黑简历模板</title>
+<style>
+  /* ========== 主题色（黑+现代蓝点缀） ========== */
+  :root {
+    --primary: #000000;
+    --accent:  #2563eb;
+    --accent-soft: #dbeafe;
+    --text:    #111827;
+    --muted:   #6b7280;
+    --divider: #e5e7eb;
+    --tag-bg:  #f3f4f6;
+    --bg:      #ffffff;
+    --paper:   #ffffff;
+  }
+
+  /* ========== 打印：A4 ========== */
+  @page { size: A4; margin: 1.4cm 1.2cm; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
+                 -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB",
+                 "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* ========== 屏幕：A4 模拟 ========== */
+  @media screen {
+    html { background: #888; }
+    body { background: #888; padding: 20px; }
+    .container {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 1.4cm 1.2cm;
+      background: var(--paper);
+      border: 1.5px solid #555;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      margin: 0 auto;
+    }
+  }
+
+  /* ========== 打印微调 ========== */
+  @media print {
+    body { font-size: 13.5px; background: #fff; padding: 0; }
+    .section { page-break-inside: avoid; }
+    .project-card { page-break-inside: avoid; }
+  }
+
+  .container { max-width: 21cm; margin: 0 auto; }
+
+  /* ========== 头部：左大姓名+职位,右联系方式键值对 ========== */
+  .header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 20px;
+    align-items: end;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #000;
+  }
+  .header-left .name {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: #000;
+  }
+  .header-left .title {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+  }
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-end;
+  }
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 12.5px;
+  }
+  .contact-row .k {
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: 10px;
+    min-width: 38px;
+  }
+  .contact-row .v { font-weight: 500; color: var(--text); }
+
+  /* ========== 章节标题:左侧黑竖条 ========== */
+  .section { margin-top: 14px; page-break-inside: avoid; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .section-title .bar {
+    width: 4px;
+    height: 15px;
+    background: #000;
+    border-radius: 1px;
+  }
+  .section-title .text {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #000;
+  }
+  .section-title .count {
+    margin-left: auto;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* ========== 条目头:左标题,右日期 ========== */
+  .item { margin-top: 6px; }
+  .item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .item-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #000;
+  }
+  .item-date {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .item-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ========== bullet 列表:▪ 方块 ========== */
+  .item-list { margin-top: 3px; padding-left: 2px; }
+  .item-list > div {
+    padding-left: 18px;
+    text-indent: -18px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+  .item-list > div::before {
+    content: "▪";
+    color: #000;
+    font-size: 1.05em;
+    line-height: 1;
+    vertical-align: 1px;
+    margin-right: 10px;
+    font-weight: 900;
+  }
+
+  /* ========== 「:」前的文字加粗 ========== */
+  .prefix { font-weight: 700; color: #000; }
+
+  /* ========== 技能卡:双列网格+浅灰底 ========== */
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+  }
+  .skill {
+    background: var(--tag-bg);
+    border-radius: 4px;
+    padding: 7px 10px;
+    border-left: 3px solid #000;
+  }
+  .skill-name {
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+  }
+  .skill-desc {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  /* ========== 项目卡片 ========== */
+  .project-card {
+    border: 1px solid var(--divider);
+    border-radius: 4px;
+    padding: 9px 12px 8px;
+    margin-top: 8px;
+    background: #fafafa;
+  }
+  .project-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .project-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #000;
+    flex: 1;
+  }
+  .project-tag {
+    font-size: 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .project-date {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .project-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+  }
+  .project-meta .tech {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .project-desc {
+    font-size: 12.5px;
+    color: var(--text);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .project-card .item-list { margin-top: 4px; }
+  .project-card .item-list > div { font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 头部 ========== -->
+  <header class="header">
+    <div class="header-left">
+      <div class="name">姓  名</div>
+      <div class="title">AIoT 嵌入式开发工程师 · 端侧 AI 工程师</div>
+    </div>
+    <div class="header-right">
+      <div class="contact-row"><span class="k">TEL</span><span class="v">+86 138 0000 0000</span></div>
+      <div class="contact-row"><span class="k">EMAIL</span><span class="v">name@example.com</span></div>
+      <div class="contact-row"><span class="k">GITHUB</span><span class="v">github.com/your-name</span></div>
+    </div>
+  </header>
+
+  <!-- ========== 教育背景 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="bar"></span>
+      <span class="text">教育背景</span>
+      <span class="count">EDUCATION</span>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某某大学 · 本科</span>
+        <span class="item-date">XXXX.XX - XXXX.XX</span>
+      </div>
+      <div class="item-sub">某某专业（某某方向）· 某某层次/荣誉</div>
+      <div class="item-list">
+        <div><span class="prefix">个人荣誉</span>:XXX 一等奖(XXXX);XXX 竞赛 XX 等级奖项</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 实习经历 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="bar"></span>
+      <span class="text">实习经历</span>
+      <span class="count">EXPERIENCE</span>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">某某公司</span>
+        <span class="item-date">XXXX.XX - XXXX.XX</span>
+      </div>
+      <div class="item-sub">嵌入式开发实习生 · 硬件部</div>
+      <div class="item-list">
+        <div><span class="prefix">项目背景</span>:主导新硬件产品从需求到样机验证的全流程开发,主导 LTE Cat.1 模组 + 多传感器系统的可行性验证与原型搭建。</div>
+        <div><span class="prefix">SDK 移植</span>:基于移远 LTE Cat.1 模组的 openMCU 框架,完成 SDK 移植、烧录与调试流程跑通;通过电话与原厂工程师对接 IO 余量、接口资源、调试方式。</div>
+        <div><span class="prefix">系统架构</span>:基于 PRD 拆解功能需求,确定"以 LTE Cat.1 模组为主控 + SPI / I2S / I2C 接口连接陀螺仪 / 音频编解码 / NFC 模拟芯片"的系统架构。</div>
+        <div><span class="prefix">验证 Demo</span>:使用 MPU6050 陀螺仪模块和 INMP441 麦克风模块,配合 ESP32-C5 主控设计并制作功能验证 PCB,完成陀螺仪数据记录、算法验证、麦克风可行性测试。</div>
+        <div><span class="prefix">资源评估</span>:完成 RAM / ROM 预估,确认主控资源可承载核心算法。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 项目经验 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="bar"></span>
+      <span class="text">项目经验</span>
+      <span class="count">PROJECTS</span>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-title">基于 ESP32-P4 的端侧 AI 视觉助手</span>
+        <span class="project-tag">独立开发</span>
+        <span class="project-date">2026</span>
+      </div>
+      <div class="project-meta">桌面智能摆件 · <span class="tech">ESP32-P4(双核 RISC-V) · ESP-IDF · ESP-DL · FreeRTOS · WSL</span></div>
+      <div class="project-desc">本地实现人脸检测 + 提醒播放,全程不上云、零网络依赖。基于 ESP-IDF(FreeRTOS 内核)+ WSL Linux 虚拟环境,集成 ESP-DL 官方人脸检测模型。</div>
+      <div class="item-list">
+        <div><span class="prefix">端侧 AI 集成</span>:基于 ESP-DL 框架集成官方人脸检测模型,跑通"图像采集 → 预处理 → 模型推理 → 结果处理"完整链路;结合官方示例与项目需求完成模型调用、参数配置与功能集成。</div>
+        <div><span class="prefix">多任务调度</span>:基于 FreeRTOS 实现多模块协同,涵盖图像采集、模型推理、音频播放、SD 卡存储等模块的并发运行;通过任务优先级与同步机制避免阻塞。</div>
+        <div><span class="prefix">低功耗设计</span>:空闲时进入 Light-Sleep 状态,整体功耗从 0.8W 降至 0.3W(降低 62.5%);通过休眠策略平衡实时性与功耗。</div>
+        <div><span class="prefix">AI 协作</span>:使用 AI 辅助生成基础代码框架与逻辑验证,本人完成功能整合、调试、bug 修复与性能调优;建立项目级 AGENT / RULES / NOTES / IDEA 规则体系管理 AI 协作。</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-head">
+        <span class="project-title">智能物流小车</span>
+        <span class="project-tag">工训赛</span>
+        <span class="project-date">2025</span>
+      </div>
+      <div class="project-meta">300×300×400mm 全向运动 · <span class="tech">STM32F407ZGTx · STM32CubeMX · Keil · 裸机 + 中断时间片</span></div>
+      <div class="project-desc">遵循"工训赛"智能物流赛题要求,自主设计制作物流小车,模拟库房物流搬运全流程(扫码、识别、抓取、搬运、放置)。</div>
+      <div class="item-list">
+        <div><span class="prefix">电机控制</span>:基于麦克纳姆轮全向运动模型,自主编写梯形加减速算法与运动控制中间层,实现小车全向变速运动。</div>
+        <div><span class="prefix">通信协议</span>:通过 UART 与 OpenMV 双向通信,自定义编解码协议,传输识别数据精准可控。</div>
+        <div><span class="prefix">嵌入式控制</span>:通过多路特定 PWM 波同步控制电机驱动、机械臂转向、料盘调整;通过 I2C 与陀螺仪通信解算运动数据。</div>
+        <div><span class="prefix">PCB 电源</span>:自主设计 4S 锂电池降压供电 + 升压模块 24V-2A 六路电机供电;插拔式接线端子 + 针座做多板固定信号传输。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 实践经历 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="bar"></span>
+      <span class="text">实践经历</span>
+      <span class="count">PRACTICE</span>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <span class="item-title">xx校园讲师</span>
+        <span class="item-date">XXXX</span>
+      </div>
+      <div class="item-sub">独立带训 N+ 学员</div>
+      <div class="item-list">
+        <div>作为 xx校园讲师,独立带训 N+ 名学员,覆盖 PCB 原理图设计、Layout 布线、焊接调试全流程;培训内容含理论讲解、实操演示、焊接指导和调试。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 专业技能 ========== -->
+  <section class="section">
+    <div class="section-title">
+      <span class="bar"></span>
+      <span class="text">专业技能</span>
+      <span class="count">SKILLS</span>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <div class="skill-name">Embedded</div>
+        <div class="skill-desc">C / C++,熟悉 STM32 / ESP32(ESP-IDF)/ STM8,裸机 + FreeRTOS 双栈</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Edge-AI</div>
+        <div class="skill-desc">使用过 ESP-DL 完成人脸检测模型集成;学习中 TFLite Micro,关注量化/算子适配/推理优化</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Bus / Protocol</div>
+        <div class="skill-desc">UART / I2C / SPI / I2S / SDIO / CAN,有多传感器系统集成经验</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">AI-Assisted Dev</div>
+        <div class="skill-desc">建立项目级 AGENT / RULES 规则体系,能用 AI 工具显著提升开发效率</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Hardware</div>
+        <div class="skill-desc">示波器 / 逻辑分析仪 / 万用表、立创 EDA、原理图 + Layout</div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Toolchain</div>
+        <div class="skill-desc">Git、WSL / Linux 基础、CMake 构建系统</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+</body>
+</html>

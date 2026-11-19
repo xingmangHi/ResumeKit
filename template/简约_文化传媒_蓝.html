@@ -34,46 +34,50 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ========== 通用：双层固定盒 ========== */
+  /* ========== 通用：外层固定盒 ========== */
   .container {
     width: 210mm;
     height: 297mm;
-    background: #dbeafe;
     margin: 0 auto;
     box-sizing: border-box;
     overflow: visible;
   }
+
+  /* ========== 通用：内层正文盒（屏幕打印共享几何） ========== */
   .paper {
-    background: var(--paper);
-    border-radius: 18px;
-    margin: 16px;
-    padding: 1.5cm 1.2cm;
+    width: calc(210mm - 32px);
     height: calc(297mm - 32px);
+    padding: 1.5cm 1.2cm;
     box-sizing: border-box;
     overflow: visible;
   }
 
-  /* ========== 屏幕：外装饰 ========== */
+  /* ========== 屏幕：外层浅蓝背景 + 内层白底圆角 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
     .container {
+      background: #dbeafe;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
+      padding: 16px;
+    }
+    .paper {
+      background: var(--paper);
+      border-radius: 18px;
     }
   }
 
-  /* ========== 打印：移除装饰元素 ========== */
+  /* ========== 打印：外层白底无装饰 + 内层白底直角 ========== */
   @media print {
     html, body { background: #fff; padding: 0; margin: 0; }
     .container {
       background: #fff;
       box-shadow: none;
+      padding: 0;
     }
     .paper {
       background: #fff;
       border-radius: 0;
-      margin: 0;
-      height: 297mm;
     }
     .section-title { break-after: avoid; }
     .item { break-inside: avoid; }
