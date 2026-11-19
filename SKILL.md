@@ -68,9 +68,9 @@ description: AI 简历美化 Skill。处理 Markdown/HTML 源文件，输出符�
 
 ### 2. 固定 A4 纸张
 
-- **纸张盒**：必须 `width: 210mm; height: 297mm;`（固定 `height`，不是 `min-height`）
+- **纸张盒**：固定 `height`（不是 `min-height`），尺寸 ≤ 页面区域（物理 210×297mm − `@page` margin）
 - **禁止撑高**：纸张盒不可随内容长高
-- **显式溢出**：内容溢出必须检测并标记，禁止 `overflow: hidden` 掩盖
+- **显式溢出**：内容溢出必须检测（正文四边、列表标记、实际 PDF），禁止 `overflow: hidden` 掩盖
 
 ### 3. 屏幕/打印共享布局
 

@@ -157,49 +157,40 @@ A4 打印声明写法示例（`@page` margin 值按模板设计调整，非统�
 @page { size: A4 portrait; margin: 0; }
 ```
 
-**固定纸张约束**：
-- 纸张盒（如 `.page`）必须使用 `width: 210mm; height: 297mm;`（**固定 `height`，不是 `min-height`**）
-- 禁止纸张盒随内容撑高：不能用 `min-height`、flex/grid 隐式最小尺寸、或让内容自动撑开纸张高度
-- 纸张盒必须在通用 CSS 规则中定义，屏幕和打印共享（见 §1.6.6 示例）
+**A4 分层几何约束**：
 
-**正文可用区的逐层扣减**：
+每个模板必须明确**四层**尺寸如何扣减，确保 HTML 纸张盒不超出页面区域：
 
-从物理纸张到正文可用区，需逐层扣减，每层只扣一次：
-
-1. **物理纸张**：210mm × 297mm（A4 标准）
-2. **减去 `@page` margin**：
+1. **物理纸张**：210mm × 297mm（A4 标准，不可改）
+2. **页面区域**（物理纸张 − `@page` margin）：
    - 若 `@page { margin: 0; }`，则页面区域 = 210mm × 297mm
    - 若 `@page { margin: 15mm; }`，则页面区域 = 180mm × 267mm
-3. **HTML 纸张盒**（`.page`）：
-   - 若 `.page { width: 210mm; height: 297mm; }`，则占满页面区域
-   - 纸张盒的 `width` × `height` 不能超过页面区域，否则被裁切
-4. **减去 HTML 纸张盒的 `padding`**（按 `box-sizing` 规则）：
-   - 若 `box-sizing: border-box;`：正文可用区 = `width` × `height` − `padding` − `border`
-   - 若 `box-sizing: content-box;`：正文可用区 = `width` × `height`（padding 和 border 额外占据空间）
-5. **可选：body 元素的 margin**（若 body 在纸张盒内）：
-   - 若 `body { margin: 0; }`，则不额外扣减
-   - 若 `body { margin: 5mm; }`，则正文可用区再减 5mm
-
-**常见配置示例**：
-
-| 配置 | `@page` margin | `.page` 尺寸 | `.page` padding | `box-sizing` | 正文可用区 |
-|------|---------------|-------------|----------------|-------------|-----------|
-| 示例 A | `0` | 210×297mm | 15mm 16mm | border-box | 178×267mm |
-| 示例 B | `15mm` | 180×267mm | 0 | border-box | 180×267mm |
-| 示例 C | `0` | 210×297mm | 0 | border-box | 210×297mm（需留白） |
+3. **HTML 纸张盒**（如 `.page`）：
+   - **必须 ≤ 页面区域**，否则被裁切
+   - **必须固定 `height`**（不是 `min-height`），禁止随内容撑高
+   - 尺寸示例：
+     - 配合 `@page { margin: 0; }`：可用 `width: 210mm; height: 297mm;`
+     - 配合 `@page { margin: 15mm; }`：应用 `width: 180mm; height: 267mm;`（或更小）
+4. **正文可用区**（HTML 纸张盒 − 自身 `padding`/`border`，按 `box-sizing` 规则）：
+   - 若 `box-sizing: border-box; padding: 15mm 16mm;`：
+     - 正文宽 = `width` − 左右 padding
+     - 正文高 = `height` − 上下 padding
+   - 若 `box-sizing: content-box;`：padding/border 额外占空间，HTML 盒需相应缩小
 
 **不能**：
+- 在非零 `@page` margin 下使用完整 210mm×297mm HTML 纸张盒（超出页面区域）
+- 用 `min-height` 让纸张盒随内容撑高
 - 把 `@page` margin 与 HTML padding 无条件相加（它们作用于不同层级）
-- 重复扣除同一层的 padding 或 border
-- 用"物理纸张 − padding = 正文可用区"的简化公式（忽略了 `@page` margin）
 
-**溢出检测**：
-- 内容溢出必须检测并标记，检测方法包括：
-  - 浏览器开发者工具检查元素边界
-  - 对比末项元素位置与纸张盒高度
-  - 实际 PDF 检查页数和末项完整性
-- 使用 `overflow: visible;` 让溢出在屏幕预览中可见（而非隐藏）
-- 禁止用 `overflow: hidden` / `clip` 掩盖溢出
+**溢出检测**（`overflow: visible` 仅暴露，不是检测）：
+
+必须分维度检查：
+1. **正文四边**：末项元素的 bottom、left、right 是否超出正文可用区（需开发者工具测量实际坐标）
+2. **列表标记/行盒**：`::marker` 或负 margin 装饰是否侵入左边距
+3. **末项与页数**：实际 PDF 检查末项是否完整、页数是否符合预期
+4. **资源就绪**：字体加载完成后重测（字体回退可能改变行数）
+
+使用 `overflow: visible;` 让溢出在屏幕预览中可见，但检测必须用上述方法，禁止 `overflow: hidden` 掩盖
 
 #### 1.6.3 盒模型重置
 ```css
@@ -362,7 +353,7 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
 - **输入**：可以是 Markdown 或 HTML，最终处理时统一转为 HTML
 - **输出**：**纯 HTML 单文件**（CSS 内联或 `<style>` 内嵌），方便浏览器打印
 - HTML 必须包含：
-  - 固定 A4 纸张：`width: 210mm; height: 297mm;`
+  - 固定纸张盒：`height` 固定（不是 `min-height`），尺寸 ≤ 页面区域（物理纸张 − `@page` margin）
   - `@page` 声明：`@page { size: A4 portrait; margin: <按模板设计>; }`
   - 屏幕与打印共享布局：字体、字号、行高、版心宽度、间距
   - 细粒度分页控制：避免标题孤行、条目拆分（见 §1.6.7）
@@ -381,8 +372,9 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
 **不是机械压缩策略，也不是机械填满页面**。协调顺序：
 
 1. **核对 A4 几何映射**：
-   - 确认纸张盒固定 210mm × 297mm（`height` 不是 `min-height`）
-   - 确认 `@page` margin 与 HTML `padding`/`border` 的分层扣减正确
+   - 确认纸张盒固定 `height`（不是 `min-height`）
+   - 确认 HTML 纸张盒 ≤ 页面区域（物理纸张 − `@page` margin）
+   - 确认 `@page` margin、HTML 纸张盒尺寸、`padding` 的分层扣减正确
    - 确认屏幕预览与打印共用相同正文区域、字体、字号、行高、间距
 
 2. **检测资源就绪与溢出**：
