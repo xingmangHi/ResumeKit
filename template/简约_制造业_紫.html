@@ -20,7 +20,7 @@
   }
 
   /* ========== 打印：A4 ========== */
-  @page { size: A4; margin: 1.5cm 1.2cm; }
+  @page { size: A4 portrait; margin: 0; }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,27 +35,43 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ========== 屏幕 A4 模拟 ========== */
+  /* ========== 通用：A4 纸张盒（每页固定） ========== */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 1.5cm 1.2cm;
+    background: var(--paper);
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* ========== 屏幕：外装饰 + 多页间距 ========== */
   @media screen {
     html { background: #888; }
     body { background: #888; padding: 20px; }
-    .container {
-      width: 21cm;
-      min-height: 29.7cm;
-      padding: 1.5cm 1.2cm;
-      background: var(--paper);
-      border: 1.5px solid #555;
+    .page {
+      outline: 1.5px solid #555;
       box-shadow: 0 0 12px rgba(0,0,0,0.25);
-      margin: 0 auto;
+      margin-bottom: 20px;
     }
+    .page:last-child { margin-bottom: 0; }
   }
 
+  /* ========== 打印：移除外装饰，页间强制分页 ========== */
   @media print {
-    body { font-size: 14.5px; background: #fff; padding: 0; }
-    .section { page-break-inside: avoid; }
+    html, body { background: #fff; padding: 0; margin: 0; }
+    .page {
+      outline: none;
+      box-shadow: none;
+      margin: 0;
+      break-after: page;
+    }
+    .page:last-child { break-after: auto; }
+    .section-title { break-after: avoid; }
+    .item { break-inside: avoid; }
+    .header { break-after: avoid; }
   }
-
-  .container { max-width: 21cm; margin: 0 auto; }
 
   /* ========== 通用 inline 图标容器（14×14，跟随父元素 color） ========== */
   .icon {
@@ -105,7 +121,6 @@
   /* ========== 章节：紫色文字 + 加粗紫色横线（2px） ========== */
   .section {
     margin-top: 18px;
-    page-break-inside: avoid;
   }
   .section-title {
     font-size: 17px;
@@ -250,8 +265,9 @@
 </style>
 </head>
 <body>
-<div class="container">
 
+<!-- ========== 第 1 页 ========== -->
+<div class="page">
   <!-- ========== 头部：居中姓名 + 联系行（手机/信封/定位 + GitHub/掘金） ========== -->
   <header class="header">
     <div class="name">姓&nbsp;&nbsp;名</div>
@@ -349,6 +365,13 @@
         <div><span class="prefix">产出成果</span>：AI 客服日均处理咨询量 200 万+，人工客服咨询量降低 40%，用户满意度提升 15%，获得部门优秀实习生称号</div>
       </div>
     </div>
+  </section>
+</div>
+
+<!-- ========== 第 2 页 ========== -->
+<div class="page">
+  <!-- ========== 实习经历（续） ========== -->
+  <section class="section">
     <div class="item">
       <div class="item-head">
         <span class="item-title">
