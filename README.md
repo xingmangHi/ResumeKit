@@ -145,7 +145,7 @@ JSON 格式:
 - **文件命名**:`{风格}_{行业}_{主色调}.html`,如 `简约_金融_黑.html`
 - **单文件 HTML**:CSS 内联或写在 `<style>` 内(便于打印)
 - **A4 优化**（关键约束）:
-  - 纸张盒固定 `width: 210mm; height: 297mm;`（**`height` 不是 `min-height`**）
+  - 纸张盒固定 `height`（不是 `min-height`），尺寸 ≤ 页面区域（物理 210×297mm − `@page` margin）
   - 禁止纸张盒随内容撑高
   - `@page { size: A4 portrait; margin: ...; }` 声明必须有
   - 屏幕预览与打印必须共用相同的字体、字号、行高、版心宽度、间距
