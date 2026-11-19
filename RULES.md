@@ -1,6 +1,6 @@
 # RULES.md — 简历美化工作区强制规则
 
-> 本文件优先级**高于** `CLAUDE.md` 与任何 skill 默认行为。
+> 本文件优先级**高于**其他协作入口文件（如 `SKILL.md`、`AGENTS.md`）。
 > 违反本文件中任何一条规则都属于操作失误，需立即修正。
 
 ---
@@ -193,10 +193,13 @@ A4 打印声明写法示例（`@page` margin 值按模板设计调整，非统�
 - 重复扣除同一层的 padding 或 border
 - 用"物理纸张 − padding = 正文可用区"的简化公式（忽略了 `@page` margin）
 
-**检测溢出**：
-- 内容溢出必须显式检测并标记
+**溢出检测**：
+- 内容溢出必须检测并标记，检测方法包括：
+  - 浏览器开发者工具检查元素边界
+  - 对比末项元素位置与纸张盒高度
+  - 实际 PDF 检查页数和末项完整性
+- 使用 `overflow: visible;` 让溢出在屏幕预览中可见（而非隐藏）
 - 禁止用 `overflow: hidden` / `clip` 掩盖溢出
-- 建议用 `overflow: visible;` 让溢出可见
 
 #### 1.6.3 盒模型重置
 ```css
@@ -234,15 +237,15 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
   background: var(--paper);
   margin: 0 auto;
   box-sizing: border-box;
-  overflow: visible;  /* 显式检测溢出，不用 hidden 掩盖 */
+  overflow: visible;  /* 让溢出可见，便于检测 */
 }
 
-/* 仅屏幕：外装饰 */
+/* 仅屏幕：外装饰（不改变版心） */
 @media screen {
   html { background: #888; }
   body { background: #888; padding: 20px; }
   .page {
-    border: 1.5px solid #555;  /* 外装饰：视觉边框 */
+    outline: 1.5px solid #555;  /* 外装饰：视觉边框（不占空间） */
     box-shadow: 0 0 12px rgba(0,0,0,0.25);  /* 外装饰：阴影 */
   }
 }
@@ -251,7 +254,7 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
 @media print {
   html, body { background: #fff; padding: 0; margin: 0; }
   .page {
-    border: none;  /* 移除视觉边框 */
+    outline: none;  /* 移除视觉边框 */
     box-shadow: none;  /* 移除阴影 */
   }
 }
@@ -260,8 +263,9 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
 **关键说明**：
 
 1. **纸张盒几何在通用规则中**：`width`、`height`、`padding` 写在 `.page` 的通用规则中，屏幕和打印都继承
-2. **外装饰不占正文区**：`border` 和 `box-shadow` 仅在 `@media screen` 中设置，不影响 `box-sizing: border-box` 的正文可用区计算
-3. **打印只移除外装饰**：`@media print` 只移除 `border` 和 `box-shadow`，不改变正文几何
+2. **外装饰不占正文区**：`outline` 和 `box-shadow` 仅在 `@media screen` 中设置，`outline` 不占布局空间，不影响正文可用区
+3. **打印只移除外装饰**：`@media print` 只移除 `outline` 和 `box-shadow`，不改变正文几何
+4. **与 `@page` margin 协调**：若 `@page { margin: 0; }`，`.page` 可用 `width: 210mm; height: 297mm;`；若 `@page { margin: 15mm; }`，`.page` 应相应调整尺寸以适应页面区域
 
 **屏幕/打印必须共享**（在通用规则中定义）：
 - 纸张盒尺寸（`width`、`height`）
@@ -357,10 +361,11 @@ font-family: "思源黑体", "Microsoft YaHei", "微软雅黑",
 
 - **输入**：可以是 Markdown 或 HTML，最终处理时统一转为 HTML
 - **输出**：**纯 HTML 单文件**（CSS 内联或 `<style>` 内嵌），方便浏览器打印
-- HTML 必须包含**打印优化**：
-  - `@page { size: A4; margin: 1.5cm 1.2cm; }`（或合理值）
-  - 关键分页控制：`page-break-inside: avoid` 用在工作经历等不可拆分的块
-  - 字体大小、间距针对打印优化（非屏幕显示）
+- HTML 必须包含：
+  - 固定 A4 纸张：`width: 210mm; height: 297mm;`
+  - `@page` 声明：`@page { size: A4 portrait; margin: <按模板设计>; }`
+  - 屏幕与打印共享布局：字体、字号、行高、版心宽度、间距
+  - 细粒度分页控制：避免标题孤行、条目拆分（见 §1.6.7）
 - 避免使用：外部 CDN、JS 框架、Web 字体在线加载
 - 优先使用：系统字体栈（`-apple-system, "PingFang SC", "Microsoft YaHei", ...`）
 
@@ -431,8 +436,8 @@ prospect/<最终命名>  → 交付
    - 复制模板 → `temp/<时间戳>/draft.html`
    - 填充个人数据
    - **嵌入拖拽脚本**（`</body>` 前，详见 §8）
-4. **用户自调**：用户在自己浏览器里打开 `draft.html`，拖动 + 改字 → 点「导出调整参数」→ 粘 JSON 给 Claude
-5. **Claude 应用**：Claude 读 JSON 改 `draft.html`（合并 style + 替换 text），写回原文件
+4. **用户自调**：用户在自己浏览器里打开 `draft.html`，拖动 + 改字 → 点「导出调整参数」→ 粘 JSON 给 AI
+5. **AI 应用**：AI 读 JSON 改 `draft.html`（合并 style + 替换 text），写回原文件
 6. **最后**才把成品 `cp` 到 `prospect/<姓名>_<岗位>_简历.html`
 
 ### 3.3 禁止的捷径
@@ -586,7 +591,7 @@ temp 目录下的 `draft.html` 末尾允许内联一段纯 vanilla JS 拖拽脚�
 
 ### 8.4 JSON 导出格式
 
-粘到对话里给 Claude 的 JSON 结构：
+粘到对话里给 AI 的 JSON 结构：
 
 ```json
 {
@@ -616,7 +621,7 @@ temp 目录下的 `draft.html` 末尾允许内联一段纯 vanilla JS 拖拽脚�
 - `style`：`margin-left` / `margin-top` 二选一或都选，**不包含 `position`**
 - `text.old` / `text.new`：原文本与新文本（按字符串精确匹配）
 
-### 8.5 Claude 应用 JSON 的步骤
+### 8.5 AI 应用 JSON 的步骤
 
 收到 JSON 后按顺序执行（**用 `querySelector` 找元素，不要肉眼找**）：
 
