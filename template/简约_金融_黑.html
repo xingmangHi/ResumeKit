@@ -25,8 +25,8 @@
                  "PingFang SC", "Hiragino Sans GB",
                  "Helvetica Neue", Arial, sans-serif;
     color: var(--text);
-    line-height: 1.8;
-    font-size: 15px;
+    line-height: 1.4;
+    font-size: 13px;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -69,29 +69,29 @@
   }
 
   /* ========== 头部 ========== */
-  .header { text-align: center; padding: 6px 0 18px; }
+  .header { text-align: center; padding: 4px 0 8px; }
   .name {
-    font-size: 34px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
-  .contact { font-size: 16px; letter-spacing: 0.3px; }
+  .contact { font-size: 13px; letter-spacing: 0.3px; }
   .contact > span { white-space: nowrap; }
   .contact > span:not(:last-child)::after { content: " | "; margin: 0 12px; }
 
   /* ========== 章节 ========== */
-  .section { margin-top: 12px; }
+  .section { margin-top: 8px; }
   .section-title {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     border-bottom: 2px solid var(--divider);
-    margin-bottom: 14px;
+    margin-bottom: 6px;
   }
 
   /* ========== 条目：标题 ｜ 中部 ｜ 日期 — 三段平均分布 ========== */
-  .item { margin-top: 6px; }
+  .item { margin-top: 4px; }
   .item-head {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -138,7 +138,6 @@
 
 <!-- ========== 第 1 页 ========== -->
 <div class="page">
-  <!-- ========== 头部 ========== -->
   <header class="header">
     <div class="name">姓&nbsp;&nbsp;名</div>
     <div class="contact">
@@ -147,8 +146,6 @@
       <span><span class="prefix">求职意向</span>：财务</span>
     </div>
   </header>
-
-  <!-- ========== 教育背景 ========== -->
   <section class="section">
     <div class="section-title">教育背景</div>
 
@@ -176,8 +173,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 工作经历 ========== -->
   <section class="section">
     <div class="section-title">工作经历</div>
 
@@ -207,11 +202,6 @@
       </div>
     </div>
   </section>
-</div>
-
-<!-- ========== 第 2 页 ========== -->
-<div class="page">
-  <!-- ========== 校园经历 ========== -->
   <section class="section">
     <div class="section-title">校园经历</div>
 
@@ -229,8 +219,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 项目经历 ========== -->
   <section class="section">
     <div class="section-title">项目经历</div>
 
@@ -246,8 +234,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 个人技能 ========== -->
   <section class="section">
     <div class="section-title">个人技能</div>
     <div class="dot-list">
@@ -256,8 +242,6 @@
       <div>英语：CET-6 596、CET-4 605</div>
     </div>
   </section>
-
-  <!-- ========== 自我评价 ========== -->
   <section class="section">
     <div class="section-title">自我评价</div>
     <div class="dot-list">

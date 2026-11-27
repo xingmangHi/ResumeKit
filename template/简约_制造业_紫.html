@@ -30,8 +30,8 @@
                  "PingFang SC", "Hiragino Sans GB",
                  "Helvetica Neue", Arial, sans-serif;
     color: var(--text);
-    line-height: 1.7;
-    font-size: 15px;
+    line-height: 1.44;
+    font-size: 13px;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -90,18 +90,18 @@
   /* ========== 头部：居中 + 联系行 ========== */
   .header {
     text-align: center;
-    padding: 4px 0 12px;
+    padding: 3px 0 8px;
   }
   .header .name {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--text);
     letter-spacing: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
   .header .contact {
-    font-size: 14.5px;
-    line-height: 1.9;
+    font-size: 13px;
+    line-height: 1.55;
     color: var(--text);
   }
   .header .contact .row > span {
@@ -120,20 +120,20 @@
 
   /* ========== 章节：紫色文字 + 加粗紫色横线（2px） ========== */
   .section {
-    margin-top: 18px;
+    margin-top: 9px;
   }
   .section-title {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--primary-dark);
     padding-bottom: 5px;
     border-bottom: 2px solid var(--primary);   /* 加粗：1 → 2px */
-    margin-bottom: 12px;
+    margin-bottom: 6px;
     letter-spacing: 1px;
   }
 
   /* ========== 条目头：三段式（左｜中｜右） ========== */
-  .item { margin-top: 8px; }
+  .item { margin-top: 4px; }
   .item-head {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -200,9 +200,9 @@
   .item-list > div {
     padding-left: 18px;
     text-indent: -18px;
-    font-size: 14px;
-    line-height: 1.75;
-    margin-top: 2px;
+    font-size: 13px;
+    line-height: 1.44;
+    margin-top: 1px;
   }
   .item-list > div::before {
     content: "●";
@@ -222,14 +222,14 @@
 
   /* 二级 ○ 子项（项目经验的"行动"内） */
   .sub-list {
-    margin: 2px 0 4px 18px;
+    margin: 2px 0 5px 18px;
     padding-left: 2px;
   }
   .sub-list > div {
     padding-left: 14px;
     text-indent: -14px;
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 13px;
+    line-height: 1.44;
     margin-top: 1px;
   }
   .sub-list > div::before {
@@ -245,7 +245,7 @@
 
   /* ========== 技术栈标签（紫色描边胶囊） ========== */
   .tech-stack {
-    margin: 6px 0 4px;
+    margin: 7px 0 5px;
     display: flex;
     flex-wrap: wrap;
     gap: 6px 8px;
@@ -268,7 +268,6 @@
 
 <!-- ========== 第 1 页 ========== -->
 <div class="page">
-  <!-- ========== 头部：居中姓名 + 联系行（手机/信封/定位 + GitHub/掘金） ========== -->
   <header class="header">
     <div class="name">姓&nbsp;&nbsp;名</div>
     <div class="contact">
@@ -323,8 +322,6 @@
       </div>
     </div>
   </header>
-
-  <!-- ========== 教育背景 ========== -->
   <section class="section">
     <div class="section-title">教育背景</div>
     <div class="item">
@@ -339,8 +336,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 实习经历 ========== -->
   <section class="section">
     <div class="section-title">实习经历</div>
     <div class="item">
@@ -366,11 +361,6 @@
       </div>
     </div>
   </section>
-</div>
-
-<!-- ========== 第 2 页 ========== -->
-<div class="page">
-  <!-- ========== 实习经历（续） ========== -->
   <section class="section">
     <div class="item">
       <div class="item-head">
@@ -395,8 +385,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 项目经验 ========== -->
   <section class="section">
     <div class="section-title">项目经验</div>
     <div class="item">

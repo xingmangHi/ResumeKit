@@ -29,8 +29,8 @@
                  "PingFang SC", "Hiragino Sans GB",
                  "Helvetica Neue", Arial, sans-serif;
     color: var(--text);
-    line-height: 1.55;
-    font-size: 14px;
+    line-height: 1.38;
+    font-size: 12.5px;
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "tnum" 1;
   }
@@ -39,7 +39,7 @@
   .page {
     width: 210mm;
     height: 297mm;
-    padding: 0.9cm 0.9cm;
+    padding: calc(0.9cm + 6px) 0.9cm 0.9cm;
     background: var(--paper);
     margin: 0 auto;
     box-sizing: border-box;
@@ -80,11 +80,11 @@
     grid-template-columns: 1fr 1.5fr;
     gap: 16px;
     align-items: end;
-    padding-bottom: 10px;
+    padding-bottom: 6px;
     border-bottom: 2px solid var(--primary);
   }
   .header-left .name {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 800;
     letter-spacing: 2px;
     line-height: 1;
@@ -121,12 +121,12 @@
   .contact-row .sep { color: var(--divider); font-weight: 400; margin: 0 3px; }
 
   /* ========== 章节标题：左侧蓝色竖条 + 黑色标题字 ========== */
-  .section { margin-top: 14px; }
+  .section { margin-top: 6px; }
   .section-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
   /* .bar 已隐藏（避免与 .text 的 border-left 形成双竖线） */
   .section-title .bar { display: none; }
@@ -147,7 +147,7 @@
   }
 
   /* ========== 条目头：左标题，右日期 ========== */
-  .item { margin-top: 6px; }
+  .item { margin-top: 3px; }
   .item-head {
     display: flex;
     justify-content: space-between;
@@ -178,8 +178,8 @@
   .item-list > div {
     padding-left: 18px;
     text-indent: -18px;
-    margin-top: 2px;
-    line-height: 1.6;
+    margin-top: 0;
+    line-height: 1.36;
   }
   .item-list > div::before {
     content: "▪";
@@ -206,7 +206,7 @@
   .skill {
     background: var(--tag-bg);
     border-radius: 3px;
-    padding: 4px 7px;
+    padding: 3px 6px;
     border-left: 2px solid var(--primary);
   }
   .skill-name {
@@ -227,8 +227,8 @@
   .project-card {
     border: 1px solid var(--divider);
     border-radius: 4px;
-    padding: 9px 12px 8px;
-    margin-top: 8px;
+    padding: 5px 9px 4px;
+    margin-top: 4px;
     background: #fafafa;
   }
   .project-head {
@@ -271,10 +271,10 @@
   .project-desc {
     font-size: 12.5px;
     color: var(--text);
-    margin-top: 4px;
-    line-height: 1.5;
+    margin-top: 2px;
+    line-height: 1.36;
   }
-  .project-card .item-list { margin-top: 4px; }
+  .project-card .item-list { margin-top: 2px; }
   .project-card .item-list > div { font-size: 12.5px; }
   .project-link {
     font-size: 11px;
@@ -289,7 +289,6 @@
 
 <!-- ========== 第 1 页 ========== -->
 <div class="page">
-  <!-- ========== 头部 ========== -->
   <header class="header">
     <div class="header-left">
       <div class="name">姓&nbsp;&nbsp;名</div>
@@ -304,8 +303,6 @@
       </div>
     </div>
   </header>
-
-  <!-- ========== 教育背景 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -323,8 +320,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 实习经历 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -346,8 +341,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 项目经验 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -371,11 +364,6 @@
       </div>
     </div>
   </section>
-</div>
-
-<!-- ========== 第 2 页 ========== -->
-<div class="page">
-  <!-- ========== 项目经验（续） ========== -->
   <section class="section">
     <div class="project-card">
       <div class="project-head">
@@ -393,8 +381,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 实践经历 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -412,8 +398,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 专业技能 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>

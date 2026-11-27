@@ -28,8 +28,8 @@
                  "PingFang SC", "Hiragino Sans GB",
                  "Helvetica Neue", Arial, sans-serif;
     color: var(--text);
-    line-height: 1.55;
-    font-size: 14px;
+    line-height: 1.34;
+    font-size: 12px;
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "tnum" 1;
   }
@@ -38,7 +38,7 @@
   .page {
     width: 210mm;
     height: 297mm;
-    padding: 1.4cm 1.2cm;
+    padding: calc(0.9cm + 6px) 1.1cm 0.9cm;
     background: var(--paper);
     margin: 0 auto;
     box-sizing: border-box;
@@ -78,11 +78,11 @@
     grid-template-columns: 1.2fr 1fr;
     gap: 20px;
     align-items: end;
-    padding-bottom: 12px;
+    padding-bottom: 5px;
     border-bottom: 2px solid #000;
   }
   .header-left .name {
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 800;
     letter-spacing: 2px;
     line-height: 1;
@@ -117,12 +117,12 @@
   .contact-row .v { font-weight: 500; color: var(--text); }
 
   /* ========== 章节标题:左侧黑竖条 ========== */
-  .section { margin-top: 14px; }
+  .section { margin-top: 5px; }
   .section-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
   }
   .section-title .bar {
     width: 4px;
@@ -131,7 +131,7 @@
     border-radius: 1px;
   }
   .section-title .text {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
     letter-spacing: 2px;
     color: #000;
@@ -145,7 +145,7 @@
   }
 
   /* ========== 条目头:左标题,右日期 ========== */
-  .item { margin-top: 6px; }
+  .item { margin-top: 2px; }
   .item-head {
     display: flex;
     justify-content: space-between;
@@ -176,8 +176,8 @@
   .item-list > div {
     padding-left: 18px;
     text-indent: -18px;
-    margin-top: 2px;
-    line-height: 1.6;
+    margin-top: 0;
+    line-height: 1.32;
   }
   .item-list > div::before {
     content: "▪";
@@ -222,8 +222,8 @@
   .project-card {
     border: 1px solid var(--divider);
     border-radius: 4px;
-    padding: 9px 12px 8px;
-    margin-top: 8px;
+    padding: 4px 8px 3px;
+    margin-top: 3px;
     background: #fafafa;
   }
   .project-head {
@@ -264,20 +264,19 @@
     font-weight: 500;
   }
   .project-desc {
-    font-size: 12.5px;
+    font-size: 12px;
     color: var(--text);
-    margin-top: 4px;
-    line-height: 1.5;
+    margin-top: 2px;
+    line-height: 1.32;
   }
-  .project-card .item-list { margin-top: 4px; }
-  .project-card .item-list > div { font-size: 12.5px; }
+  .project-card .item-list { margin-top: 2px; }
+  .project-card .item-list > div { font-size: 12px; }
 </style>
 </head>
 <body>
 
 <!-- ========== 第 1 页 ========== -->
 <div class="page">
-  <!-- ========== 头部 ========== -->
   <header class="header">
     <div class="header-left">
       <div class="name">姓  名</div>
@@ -289,8 +288,6 @@
       <div class="contact-row"><span class="k">GITHUB</span><span class="v">github.com/your-name</span></div>
     </div>
   </header>
-
-  <!-- ========== 教育背景 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -308,8 +305,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 实习经历 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -331,8 +326,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 项目经验 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -356,11 +349,6 @@
       </div>
     </div>
   </section>
-</div>
-
-<!-- ========== 第 2 页 ========== -->
-<div class="page">
-  <!-- ========== 项目经验（续） ========== -->
   <section class="section">
     <div class="project-card">
       <div class="project-head">
@@ -378,8 +366,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 实践经历 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -397,8 +383,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ========== 专业技能 ========== -->
   <section class="section">
     <div class="section-title">
       <span class="bar"></span>
@@ -434,7 +418,6 @@
   </section>
 
 </div>
-
 
 </body>
 </html>
